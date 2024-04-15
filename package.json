@@ -5,13 +5,12 @@
     "packages/*"
   ],
   "scripts": {
-    "publish": "dotenv -- lerna run rebuild && lerna publish --no-push"
+    "publish": "lerna run rebuild && lerna publish --no-push"
   },
   "devDependencies": {
     "@types/node": "^20.12.7",
     "@typescript-eslint/eslint-plugin": "^7.6.0",
     "@typescript-eslint/parser": "^7.6.0",
-    "dotenv-cli": "^7.4.1",
     "eslint": "^8.57.0",
     "lakutata": "^0.2.1-proto.77",
     "lerna": "^8.1.2",
