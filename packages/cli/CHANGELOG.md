@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.1.0-alpha.5](https://github.com/lakutata/lakutata-packages/compare/@lakutata/cli@2.1.0-alpha.4...@lakutata/cli@2.1.0-alpha.5) (2024-04-15)
+
+
+### Features
+
+* **cli:** add clean, build, and rebuild scripts ([8d145cf](https://github.com/lakutata/lakutata-packages/commit/8d145cf70b753975c0e204b772074a2786887dbb))
+
+
+
+
+
 # [2.1.0-alpha.4](https://github.com/lakutata/lakutata-packages/compare/@lakutata/cli@2.1.0-alpha.3...@lakutata/cli@2.1.0-alpha.4) (2024-04-15)
 
 **Note:** Version bump only for package @lakutata/cli
