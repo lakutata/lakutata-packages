@@ -2,6 +2,9 @@ import {DTO, Provider} from 'lakutata'
 import {Configurable} from 'lakutata/decorator/di'
 import 'reflect-metadata'
 import {Library} from './lib/ffi/Library'
+import {LibFunction} from './lib/ffi/types/LibFunction'
+import {TypeSpec} from './lib/ffi/types/TypeSpec'
+import {LibrarySymbol} from './lib/ffi/LibrarySymbol'
 
 /**
  * FFI classes & functions
@@ -58,10 +61,6 @@ export class FFIProvider extends Provider {
      */
     protected async init(): Promise<void> {
         this.#library = new Library(this.lib)
-        const offset = this.#library.symbol('offset', 'int')
-        offset.value = 8
-        const func = this.#library.func('uint64_t factorial(int max)')
-        console.log('ffi test:', func(3), offset.value)
     }
 
     /**
@@ -70,5 +69,89 @@ export class FFIProvider extends Provider {
      */
     protected async destroy(): Promise<void> {
         this.#library.destroy()
+    }
+
+    /**
+     * library symbol
+     * @param name
+     * @param type
+     */
+    public symbol(name: string, type: TypeSpec): LibrarySymbol {
+        return this.#library.symbol(name, type)
+    }
+
+    /**
+     * Declare function in the library
+     * @param definition
+     */
+    public func(definition: string): LibFunction
+    /**
+     * Declare function in the library
+     * @param name
+     * @param result
+     * @param args
+     */
+    public func(name: string, result: TypeSpec, args: TypeSpec[]): LibFunction
+    public func(nameOrDefinition: string, result?: TypeSpec, args?: TypeSpec[]): LibFunction {
+        if (result && args) {
+            return this.cdeclFunc(nameOrDefinition, result, args)
+        } else {
+            return this.cdeclFunc(nameOrDefinition)
+        }
+    }
+
+    /**
+     * Cdecl
+     * This is the default convention, and the only one on other platforms
+     * @param definition
+     */
+    public cdeclFunc(definition: string): LibFunction
+    /**
+     * Cdecl
+     * This is the default convention, and the only one on other platforms
+     * @param name
+     * @param result
+     * @param args
+     */
+    public cdeclFunc(name: string, result: TypeSpec, args: TypeSpec[]): LibFunction
+    public cdeclFunc(nameOrDefinition: string, result?: TypeSpec, args?: TypeSpec[]): LibFunction {
+        if (result && args) {
+            return this.#library.func(nameOrDefinition, result, args)
+        } else {
+            return this.#library.func(nameOrDefinition)
+        }
+    }
+
+    /**
+     * Stdcall
+     * This convention is used extensively within the Win32 API
+     * @param name
+     * @param result
+     * @param args
+     */
+    public sdtcallFunc(name: string, result: TypeSpec, args: TypeSpec[]): LibFunction {
+        return this.#library.sdtcallFunc(name, result, args)
+    }
+
+    /**
+     * Fastcall
+     * Rarely used, uses ECX and EDX for first two parameters
+     * @param name
+     * @param result
+     * @param args
+     */
+    public fastcallFunc(name: string, result: TypeSpec, args: TypeSpec[]): LibFunction {
+        return this.#library.fastcallFunc(name, result, args)
+    }
+
+    /**
+     * Thiscall
+     * Rarely used, uses ECX for first parameter
+     * @param name
+     * @param result
+     * @param args
+     */
+    public thiscallFunc(name: string, result: TypeSpec, args: TypeSpec[]): LibFunction {
+        return this.#library.thiscallFunc(name, result, args)
     }
 }

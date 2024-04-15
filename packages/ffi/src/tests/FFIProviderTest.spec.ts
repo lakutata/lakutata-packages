@@ -11,6 +11,10 @@ Application.run(async (): Promise<ApplicationOptions> => ({
         }
     },
     bootstrap: [async (m) => {
-        const ffi = m.getObject<FFIProvider>('ffi')
+        const ffi = await m.getObject<FFIProvider>('ffi')
+        const offset = ffi.symbol('offset', 'int')
+        offset.value = 8
+        const func = ffi.func('uint64_t factorial(int max)')
+        console.log('ffi test:', func(3), offset.value)
     }]
 }))
