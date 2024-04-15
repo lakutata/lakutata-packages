@@ -1,6 +1,7 @@
 import {type Spinner as CliSpinner, dots} from 'cli-spinners'
 import {Configurable, Singleton} from 'lakutata/decorator/di'
 import {Component} from 'lakutata'
+import {As} from 'lakutata/helper'
 
 @Singleton()
 export class Spinner extends Component {
@@ -10,14 +11,14 @@ export class Spinner extends Component {
 
     protected spinnerInterval: NodeJS.Timeout | null = null
 
-    protected logUpdate:any
+    protected logUpdate: any
 
     /**
      * Initializer
      * @protected
      */
     protected async init(): Promise<void> {
-        this.logUpdate=await import('log-update')
+        this.logUpdate = As(await import('log-update'))
     }
 
     /**

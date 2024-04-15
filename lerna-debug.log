@@ -1,0 +1,6 @@
+55 error Error: Command failed with exit code 128: git push --follow-tags --no-verify --atomic origin main
+55 error remote: Support for password authentication was removed on August 13, 2021.
+55 error remote: Please see https://docs.github.com/get-started/getting-started-with-git/about-remote-repositories#cloning-with-https-urls for information on currently recommended modes of authentication.
+55 error fatal: Authentication failed for 'https://github.com/lakutata/lakutata-packages.git/'
+55 error     at makeError (/Users/alex/WebstormProjects/lakutata-packages/node_modules/execa/lib/error.js:59:11)
+55 error     at handlePromise (/Users/alex/WebstormProjects/lakutata-packages/node_modules/execa/index.js:114:26)
