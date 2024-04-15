@@ -9,7 +9,7 @@
     "@typescript-eslint/eslint-plugin": "^7.6.0",
     "@typescript-eslint/parser": "^7.6.0",
     "eslint": "^8.57.0",
-    "lakutata": "^0.2.1-proto.76",
+    "lakutata": "^0.2.1-proto.77",
     "lerna": "^8.1.2",
     "reflect-metadata": "^0.2.2",
     "shx": "^0.3.4",
