@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.2.0](https://github.com/lakutata/lakutata-packages/compare/@lakutata/cli@2.1.0-alpha.5...@lakutata/cli@2.2.0) (2024-04-15)
+
+
+### Features
+
+* **cli:** Add description and usage information to README.md file ([a4d288b](https://github.com/lakutata/lakutata-packages/commit/a4d288b9dd34549f147481d5aa36cd43620707be))
+
+
+
+
+
 # [2.1.0-alpha.5](https://github.com/lakutata/lakutata-packages/compare/@lakutata/cli@2.1.0-alpha.4...@lakutata/cli@2.1.0-alpha.5) (2024-04-15)
 
 
