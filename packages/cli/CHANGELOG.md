@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0](https://github.com/lakutata/lakutata-packages/compare/@lakutata/cli@2.2.0...@lakutata/cli@2.3.0) (2024-04-15)
+
+
+### Bug Fixes
+
+* Fix import statements in CLIApp.ts and Information.ts ([bff006b](https://github.com/lakutata/lakutata-packages/commit/bff006b9adb51fc95bc0d018950d9b88493d60ad))
+
+
+### Features
+
+* **cli:** add initialization step after project creation ([5843178](https://github.com/lakutata/lakutata-packages/commit/5843178bfb91f1420921717fc1f63b7f11dfd48a))
+* **cli:** update dependencies and improve installation process ([fd70167](https://github.com/lakutata/lakutata-packages/commit/fd70167d37b3f9af738272ac2e8599d45bc26347))
+* Update lakutata package to version 2.0.2 ([e3c0b22](https://github.com/lakutata/lakutata-packages/commit/e3c0b22e65ae250f396e8b71137f41c61049df5b))
+
+
+
+
+
 # [2.2.0](https://github.com/lakutata/lakutata-packages/compare/@lakutata/cli@2.1.0-alpha.5...@lakutata/cli@2.2.0) (2024-04-15)
 
 
