@@ -2,8 +2,6 @@ import {type Spinner as CliSpinner, dots} from 'cli-spinners'
 import {Configurable, Singleton} from 'lakutata/decorator/di'
 import {Component} from 'lakutata'
 
-const logUpdate = require('log-update')
-
 @Singleton()
 export class Spinner extends Component {
 
@@ -11,6 +9,16 @@ export class Spinner extends Component {
     protected readonly style: CliSpinner = dots
 
     protected spinnerInterval: NodeJS.Timeout | null = null
+
+    protected logUpdate:any
+
+    /**
+     * Initializer
+     * @protected
+     */
+    protected async init(): Promise<void> {
+        this.logUpdate=await import('log-update')
+    }
 
     /**
      * Start spinner
@@ -22,7 +30,7 @@ export class Spinner extends Component {
         this.spinnerInterval = setInterval(() => {
             const {frames} = this.style
             const text: string = description ? `${frames[i = ++i % frames.length]} ${typeof description === 'function' ? description() : description}` : frames[i = ++i % frames.length]
-            logUpdate(text)
+            this.logUpdate(text)
         }, dots.interval)
     }
 
@@ -33,7 +41,7 @@ export class Spinner extends Component {
         if (this.spinnerInterval) {
             clearInterval(this.spinnerInterval)
             this.spinnerInterval = null
-            logUpdate.clear()
+            this.logUpdate.clear()
         }
     }
 }
