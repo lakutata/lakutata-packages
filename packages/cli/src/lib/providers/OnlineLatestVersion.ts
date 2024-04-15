@@ -24,9 +24,9 @@ export class OnlineLatestVersion extends Provider {
         let onlineLatestVersion: string
         const prereleaseInfo: ReadonlyArray<string | number> | null = prerelease(this.version)
         if (prereleaseInfo && prereleaseInfo[0]) {
-            onlineLatestVersion = await require('latest-version')(this.name, {version: prereleaseInfo[0].toString()})
+            onlineLatestVersion = await require('latest-version').default(this.name, {version: prereleaseInfo[0].toString()})
         } else {
-            onlineLatestVersion = await require('latest-version')(this.name)
+            onlineLatestVersion = await require('latest-version').default(this.name)
         }
         return isVersionGreaterThan(onlineLatestVersion, this.version) ? onlineLatestVersion : this.version
     }

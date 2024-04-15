@@ -36,7 +36,8 @@ export class Information extends Provider {
      * @protected
      */
     protected async init(): Promise<void> {
-        const {packageDirectory} = require('pkg-dir')
+        // const {packageDirectory} = require('pkg-dir')
+        const {packageDirectory} = await import('pkg-dir')
         this.packageDirectory = packageDirectory
         const installPath: string | undefined = await packageDirectory({cwd: this.currentDirectory})
         this.installPath = installPath ? installPath : 'UNKNOWN'
@@ -45,8 +46,8 @@ export class Information extends Provider {
         if (projectRoot) {
             const packageJsonPath: string = resolve(projectRoot, './package.json')
             try {
-                const rawPackageJsonStr: string = await readFile(packageJsonPath, {encoding: 'utf-8'})
-                const packageJson: Record<string, any> = JSON.parse(rawPackageJsonStr)
+                const rawPackageJsonBuffer: Buffer = await readFile(packageJsonPath)
+                const packageJson: Record<string, any> = JSON.parse(rawPackageJsonBuffer.toString())
                 const dependenciesKeyRegExp: RegExp = new RegExp('dependencies'.toUpperCase())
                 Object.keys(packageJson).forEach((key: string): void => {
                     if (dependenciesKeyRegExp.test(key.toUpperCase())) {
@@ -195,7 +196,8 @@ export class Information extends Provider {
         const projectRoot: string | null = this.getRoot()
         if (projectRoot) {
             try {
-                const pkgJson: any = JSON.parse(await readFile(resolve(projectRoot, './node_modules', `./${this.name}/package.json`), {encoding: 'utf-8'}))
+                const pkgJsonBuffer: Buffer = await readFile(resolve(projectRoot, './node_modules', `./${this.name}/package.json`))
+                const pkgJson: any = JSON.parse(pkgJsonBuffer.toString())
                 const version: string = pkgJson.version
                 return version ? version : null
             } catch (e) {

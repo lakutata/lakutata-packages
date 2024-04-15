@@ -127,8 +127,11 @@ export class Creator extends Provider {
         await this.puller.pull(branch, targetPath)
         this.spinner.stop()
         this.log.info(`${charCheck} Template pulled.`)
-        await require('execa').execa('npm', ['install'], {cwd: targetPath})
-        await require('execa').execa('npm', ['install', `${this.onlineVersion.getName()}@${await this.onlineVersion.getVersion()}`], {cwd: targetPath})
-
+        this.spinner.start('Installing')
+        const {execa} = await import('execa')
+        await execa('npm', ['install'], {cwd: targetPath})
+        await execa('npm', ['install', `${this.onlineVersion.getName()}@${await this.onlineVersion.getVersion()}`], {cwd: targetPath})
+        this.spinner.stop()
+        this.log.info(`${charCheck} Project has been successfully created.`)
     }
 }
