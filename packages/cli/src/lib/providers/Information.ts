@@ -36,7 +36,7 @@ export class Information extends Provider {
      * @protected
      */
     protected async init(): Promise<void> {
-        const {packageDirectory} = await import('pkg-dir')
+        const {packageDirectory} = require('pkg-dir')
         this.packageDirectory = packageDirectory
         const installPath: string | undefined = await packageDirectory({cwd: this.currentDirectory})
         this.installPath = installPath ? installPath : 'UNKNOWN'
@@ -45,11 +45,12 @@ export class Information extends Provider {
         if (projectRoot) {
             const packageJsonPath: string = resolve(projectRoot, './package.json')
             try {
-                const packageJson = JSON.parse(await readFile(packageJsonPath, {encoding: 'utf-8'}))
+                const rawPackageJsonStr: string = await readFile(packageJsonPath, {encoding: 'utf-8'})
+                const packageJson: Record<string, any> = JSON.parse(rawPackageJsonStr)
                 const dependenciesKeyRegExp: RegExp = new RegExp('dependencies'.toUpperCase())
                 Object.keys(packageJson).forEach((key: string): void => {
                     if (dependenciesKeyRegExp.test(key.toUpperCase())) {
-                        Object.keys(packageJson[key]).forEach((dependencyName: string) => {
+                        Object.keys(packageJson[key]).forEach((dependencyName: string): void => {
                             if (dependencyName === this.name) {
                                 this.projectRoot = projectRoot
                             }
@@ -194,7 +195,8 @@ export class Information extends Provider {
         const projectRoot: string | null = this.getRoot()
         if (projectRoot) {
             try {
-                const version: string = JSON.parse(await readFile(resolve(projectRoot, './node_modules', `./${this.name}/package.json`), {encoding: 'utf-8'})).version
+                const pkgJson: any = JSON.parse(await readFile(resolve(projectRoot, './node_modules', `./${this.name}/package.json`), {encoding: 'utf-8'}))
+                const version: string = pkgJson.version
                 return version ? version : null
             } catch (e) {
                 return null

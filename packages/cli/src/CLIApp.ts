@@ -22,6 +22,7 @@ import {
     CLIMap,
     EntrypointDestroyerRegistrar
 } from 'lakutata/com/entrypoint'
+import * as console from 'node:console'
 
 Application.run(async (): Promise<ApplicationOptions> => ({
     id: 'cli.lakutata.app',
