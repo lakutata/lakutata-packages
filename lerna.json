@@ -3,8 +3,7 @@
   "version": "independent",
   "command": {
     "publish": {
-      "conventionalCommits": true,
-      "skip-git": true
+      "conventionalCommits": true
     }
   }
 }
