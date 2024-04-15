@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.1.0-alpha.2](https://github.com/lakutata/lakutata-packages/compare/@lakutata/cli@2.1.0-alpha.1...@lakutata/cli@2.1.0-alpha.2) (2024-04-15)
+
+
+### Features
+
+* Update Spinner component ([fad870c](https://github.com/lakutata/lakutata-packages/commit/fad870cbcd912340c8eb9ae50286c805ca4079dd))
+
+
+
+
+
 # [2.1.0-alpha.1](https://github.com/lakutata/lakutata-packages/compare/@lakutata/cli@2.1.0-alpha.0...@lakutata/cli@2.1.0-alpha.1) (2024-04-15)
 
 
