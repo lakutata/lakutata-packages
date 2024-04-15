@@ -28,7 +28,7 @@ export class Spinner extends Component {
     public start(description?: string | (() => string)): void {
         this.stop()
         let i: number = 0
-        this.spinnerInterval = setInterval(() => {
+        this.spinnerInterval = setInterval((): void => {
             const {frames} = this.style
             const text: string = description ? `${frames[i = ++i % frames.length]} ${typeof description === 'function' ? description() : description}` : frames[i = ++i % frames.length]
             this.logUpdate(text)
