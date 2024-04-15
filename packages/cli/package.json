@@ -21,6 +21,9 @@
     "url": "git+https://github.com/lakutata/lakutata-packages.git"
   },
   "scripts": {
+    "clean": "shx rm -rf ./dist",
+    "build": "tsc",
+    "rebuild": "npm run clean && npm run build",
     "test": "node ./__tests__/@lakutata/cli.test.js"
   },
   "bugs": {
