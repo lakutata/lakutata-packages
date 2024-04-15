@@ -5,8 +5,6 @@ import {DTO, Provider, Time} from 'lakutata'
 import {Configurable} from 'lakutata/decorator/di'
 import {DevNull} from 'lakutata/helper'
 
-const {packageDirectory} = require('pkg-dir')
-
 export class Information extends Provider {
 
     @Configurable(DTO.String().required())
@@ -27,6 +25,8 @@ export class Information extends Provider {
     @Configurable(DTO.String().required())
     protected readonly workingDirectory: string
 
+    protected packageDirectory: (options?: any) => Promise<string | undefined>
+
     protected installPath: string
 
     protected projectRoot: string | null
@@ -36,6 +36,8 @@ export class Information extends Provider {
      * @protected
      */
     protected async init(): Promise<void> {
+        const {packageDirectory} = await import('pkg-dir')
+        this.packageDirectory = packageDirectory
         const installPath: string | undefined = await packageDirectory({cwd: this.currentDirectory})
         this.installPath = installPath ? installPath : 'UNKNOWN'
 
@@ -84,7 +86,7 @@ export class Information extends Provider {
      */
     private async findLocalRoot(path: string): Promise<string | null> {
         try {
-            const dir: string | undefined = await packageDirectory({cwd: path})
+            const dir: string | undefined = await this.packageDirectory({cwd: path})
             return dir ? dir : null
         } catch (e) {
             return null
