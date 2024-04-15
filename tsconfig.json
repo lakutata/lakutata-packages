@@ -1,0 +1,16 @@
+{
+  "extends": "lakutata/tsconfig.json",
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": [
+      "ES2022"
+    ],
+    "declaration": true,
+    "moduleDetection": "auto",
+    "module": "Node16",
+    "moduleResolution": "Node16",
+    "baseUrl": ".",
+    "allowJs": true,
+    "checkJs": false
+  }
+}

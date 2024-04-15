@@ -1,0 +1,29 @@
+{
+  "name": "@lakutata/cli",
+  "version": "2.0.0",
+  "description": "Lakutata CLI tool",
+  "keywords": [
+    "lakutata",
+    "cli",
+    "tool"
+  ],
+  "author": "myq1991 <myq1991@gmail.com>",
+  "homepage": "https://github.com/lakutata/lakutata-packages",
+  "license": "MIT",
+  "bin": {
+    "lakutata": "./dist/CLIApp.js"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lakutata/lakutata-packages.git"
+  },
+  "scripts": {
+    "test": "node ./__tests__/@lakutata/cli.test.js"
+  },
+  "bugs": {
+    "url": "https://github.com/lakutata/lakutata-packages/issues"
+  }
+}
