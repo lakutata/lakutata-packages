@@ -2,6 +2,9 @@ import {ProjectTypeConfig} from '../lib/ProjectTypeConfig'
 import {DTO} from 'lakutata'
 import {Expect} from 'lakutata/decorator/dto'
 
+/**
+ * Create project options
+ */
 export class CreateProjectOptions extends DTO {
 
     @Expect(
