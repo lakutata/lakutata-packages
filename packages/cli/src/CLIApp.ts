@@ -39,6 +39,7 @@ Application.run(async (): Promise<ApplicationOptions> => ({
             style: dots
         },
         entrypoint: BuildEntrypoints({
+            controllers: [CommandLineController],
             cli: BuildCLIEntrypoint((module: Module, cliMap: CLIMap, handler: CLIEntrypointHandler, registerDestroy: EntrypointDestroyerRegistrar) => {
                 const CLIProgram: Command = new Command()
                 cliMap.forEach((dtoJsonSchema: JSONSchema, command: string): void => {
@@ -77,7 +78,6 @@ Application.run(async (): Promise<ApplicationOptions> => ({
             workingDirectory: process.cwd()
         }
     },
-    controllers: [CommandLineController],
     bootstrap: ['entrypoint']
 }))
     .onUncaughtException((error: Error) => {

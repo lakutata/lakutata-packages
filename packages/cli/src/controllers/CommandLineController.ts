@@ -2,9 +2,10 @@ import {CreateProjectOptions} from '../options/CreateProjectOptions'
 import {LakutataInfoOptions} from '../options/LakutataInfoOptions'
 import {Information} from '../lib/providers/Information'
 import {Creator} from '../lib/providers/Creator'
-import {type ActionPattern, Controller} from 'lakutata'
+import {type ActionPattern} from 'lakutata'
 import {Inject} from 'lakutata/decorator/di'
 import {CLIAction} from 'lakutata/decorator/ctrl'
+import {Controller} from 'lakutata/com/entrypoint'
 
 export class CommandLineController extends Controller {
 
