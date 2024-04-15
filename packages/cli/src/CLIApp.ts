@@ -23,6 +23,7 @@ import {
     EntrypointDestroyerRegistrar
 } from 'lakutata/com/entrypoint'
 import * as console from 'node:console'
+import {OnlineLatestVersion} from './lib/providers/OnlineLatestVersion'
 
 Application.run(async (): Promise<ApplicationOptions> => ({
     id: 'cli.lakutata.app',
@@ -77,6 +78,11 @@ Application.run(async (): Promise<ApplicationOptions> => ({
             license: packageLicense,
             currentDirectory: __dirname,
             workingDirectory: process.cwd()
+        },
+        onlineVersion: {
+            class: OnlineLatestVersion,
+            name: packageName,
+            version: packageVersion
         }
     },
     bootstrap: ['entrypoint']

@@ -1,7 +1,6 @@
 import {type Spinner as CliSpinner, dots} from 'cli-spinners'
 import {Configurable, Singleton} from 'lakutata/decorator/di'
 import {Component} from 'lakutata'
-import {As} from 'lakutata/helper'
 
 @Singleton()
 export class Spinner extends Component {

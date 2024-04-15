@@ -14,6 +14,7 @@ import {IsExists} from 'lakutata/helper'
 import {Accept} from 'lakutata/decorator/dto'
 import ansis from 'ansis'
 import CLITable from 'cli-table3'
+import {OnlineLatestVersion} from './OnlineLatestVersion'
 
 export class Creator extends Provider {
 
@@ -31,6 +32,9 @@ export class Creator extends Provider {
 
     @Inject('info')
     protected readonly frameworkInfo: Information
+
+    @Inject('onlineVersion')
+    protected readonly onlineVersion: OnlineLatestVersion
 
     /**
      * Check if the target path exists
@@ -85,7 +89,7 @@ export class Creator extends Provider {
         const appName: string = options.name
         const appId: string = options.id
         const appDescription: string = options.description
-        const packageName: string = appId
+        // const packageName: string = appId
         const authorName: string = options.author
         const licenseName: string = options.license
         const appType: string = options.type
@@ -119,7 +123,12 @@ export class Creator extends Provider {
         await this.checkTargetPathExistence(targetPath, options.initOnly)
         await this.checkTargetPathIsDirectory(targetPath)
         await this.checkTargetDirectoryIsEmpty(targetPath)
-        this.log.info('Begin project creation')
-        //TODO
+        this.spinner.start('Pulling')
+        await this.puller.pull(branch, targetPath)
+        this.spinner.stop()
+        this.log.info(`${charCheck} Template pulled.`)
+        await require('execa').execa('npm', ['install'], {cwd: targetPath})
+        await require('execa').execa('npm', ['install', `${this.onlineVersion.getName()}@${await this.onlineVersion.getVersion()}`], {cwd: targetPath})
+
     }
 }

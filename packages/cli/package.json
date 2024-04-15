@@ -35,8 +35,11 @@
     "cli-table3": "^0.6.4",
     "commander": "^12.0.0",
     "degit": "^2.8.4",
+    "execa": "^8.0.1",
+    "latest-version": "^9.0.0",
     "log-update": "^6.0.0",
-    "pkg-dir": "^8.0.0"
+    "pkg-dir": "^8.0.0",
+    "semver": "^7.6.0"
   },
   "devDependencies": {
     "@types/degit": "^2.8.6"
