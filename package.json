@@ -12,6 +12,7 @@
     "lakutata": "^0.2.1-proto.76",
     "lerna": "^8.1.2",
     "reflect-metadata": "^0.2.2",
+    "shx": "^0.3.4",
     "tsx": "^4.7.2",
     "typescript": "^5.4.5"
   }
