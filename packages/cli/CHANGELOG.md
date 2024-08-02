@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.4.0](https://github.com/lakutata/lakutata-packages/compare/@lakutata/cli@2.3.0...@lakutata/cli@2.4.0) (2024-08-02)
+
+
+### Features
+
+* **cli:** update initOnly option to overwrite option ([9822407](https://github.com/lakutata/lakutata-packages/commit/982240776987ee281ed95e5a507ceac884146a75))
+
+
+
+
+
 # [2.3.0](https://github.com/lakutata/lakutata-packages/compare/@lakutata/cli@2.2.0...@lakutata/cli@2.3.0) (2024-04-15)
 
 
