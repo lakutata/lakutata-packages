@@ -4,13 +4,13 @@ import {Spinner} from '../components/Spinner.js'
 import {CreateProjectOptions} from '../../options/CreateProjectOptions.js'
 import {ProjectTypeConfig} from '../ProjectTypeConfig.js'
 import path from 'node:path'
-import {mkdir, readdir, stat} from 'node:fs/promises'
+import {mkdir, readdir, readFile, stat, writeFile} from 'node:fs/promises'
 import {Stats} from 'node:fs'
 import {charCheck, charCross} from '../SpecialChar.js'
 import {Application, Provider} from 'lakutata'
 import {Inject} from 'lakutata/decorator/di'
 import {Logger} from 'lakutata/com/logger'
-import {IsExists} from 'lakutata/helper'
+import {Glob, IsExists, Templating} from 'lakutata/helper'
 import {Accept} from 'lakutata/decorator/dto'
 import ansis from 'ansis'
 import CLITable from 'cli-table3'
@@ -81,6 +81,21 @@ export class Creator extends Provider {
     }
 
     /**
+     * project information filling
+     * @protected
+     */
+    protected async projectInformationFilling(targetPath: string, fields: Record<string, string>): Promise<void> {
+        const items: string[] = await Glob(path.resolve(targetPath, '**/*'))
+        for (const item of items) {
+            const stats: Stats = await stat(item)
+            if (!stats.isFile()) continue
+            const rawContent: string = await readFile(item, {encoding: 'utf-8'})
+            const filledContent: string = Templating(rawContent, fields, {ignoreMissing: true})
+            if (rawContent !== filledContent) await writeFile(item, filledContent, {flag: 'w'})
+        }
+    }
+
+    /**
      * Exec create
      * @param options
      */
@@ -127,8 +142,17 @@ export class Creator extends Provider {
         await this.puller.pull(branch, targetPath)
         this.spinner.stop()
         this.log.info(`${charCheck} Template pulled.`)
+        this.spinner.start('Filling information')
+        await this.projectInformationFilling(targetPath, {
+            $APP_NAME: appName,
+            $APP_ID: appId,
+            $APP_DESC: appDescription,
+            $APP_AUTHOR: authorName,
+            $APP_LICENSE: licenseName
+        })
+        this.spinner.stop()
+        this.log.info(`${charCheck} Project information filling completed.`)
         this.spinner.start('Installing')
-        //TODO 将项目内的内容进行初始化
         const {execa} = await import('execa')
         await execa('npm', ['install'], {cwd: targetPath})
         await execa('npm', ['install', `${this.onlineVersion.getName()}@${await this.onlineVersion.getVersion()}`], {cwd: targetPath})
