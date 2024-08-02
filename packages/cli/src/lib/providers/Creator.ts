@@ -128,11 +128,11 @@ export class Creator extends Provider {
         this.spinner.stop()
         this.log.info(`${charCheck} Template pulled.`)
         this.spinner.start('Installing')
+        //TODO 将项目内的内容进行初始化
         const {execa} = await import('execa')
         await execa('npm', ['install'], {cwd: targetPath})
         await execa('npm', ['install', `${this.onlineVersion.getName()}@${await this.onlineVersion.getVersion()}`], {cwd: targetPath})
         this.spinner.stop()
-        //TODO 将项目内的内容进行初始化
         this.log.info(`${charCheck} Project has been successfully created.`)
     }
 }
