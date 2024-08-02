@@ -39,7 +39,7 @@
     "execa": "^8.0.1",
     "lakutata": "^2.0.11",
     "latest-version": "^9.0.0",
-    "log-update": "^6.0.0",
+    "log-update": "^6.1.0",
     "pkg-dir": "^8.0.0",
     "semver": "^7.6.0"
   },
