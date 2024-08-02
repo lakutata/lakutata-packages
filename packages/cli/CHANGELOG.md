@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.5.0](https://github.com/lakutata/lakutata-packages/compare/@lakutata/cli@2.4.1...@lakutata/cli@2.5.0) (2024-08-02)
+
+
+### Features
+
+* **cli:** update Spinner component initialization ([8d5c3c8](https://github.com/lakutata/lakutata-packages/commit/8d5c3c857c291a42f35a6d1a7b738291113706c6))
+
+
+
+
+
 ## [2.4.1](https://github.com/lakutata/lakutata-packages/compare/@lakutata/cli@2.4.0...@lakutata/cli@2.4.1) (2024-08-02)
 
 **Note:** Version bump only for package @lakutata/cli
