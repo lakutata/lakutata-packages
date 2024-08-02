@@ -17,7 +17,9 @@ export class Spinner extends Component {
      * @protected
      */
     protected async init(): Promise<void> {
-        this.logUpdate = require('log-update').default
+        const logUpdatePkg = await import('log-update')
+        // this.logUpdate = require('log-update').default
+        this.logUpdate = logUpdatePkg.default
     }
 
     /**
