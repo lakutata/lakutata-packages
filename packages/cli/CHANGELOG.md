@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.8.0](https://github.com/lakutata/lakutata-packages/compare/@lakutata/cli@2.7.0...@lakutata/cli@2.8.0) (2024-08-02)
+
+
+### Bug Fixes
+
+* **cli:** remove commented code in OnlineLatestVersion.ts ([8820c2b](https://github.com/lakutata/lakutata-packages/commit/8820c2bb9fb501f5139b1a8ad0e05d8bdc2ee02c))
+
+
+### Features
+
+* **creator:** add project information filling ([b230861](https://github.com/lakutata/lakutata-packages/commit/b23086112dce8a5992f3e337c9f96dae8d69d5ec))
+
+
+
+
+
 # [2.7.0](https://github.com/lakutata/lakutata-packages/compare/@lakutata/cli@2.6.1...@lakutata/cli@2.7.0) (2024-08-02)
 
 
