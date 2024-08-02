@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.6.0](https://github.com/lakutata/lakutata-packages/compare/@lakutata/cli@2.5.0...@lakutata/cli@2.6.0) (2024-08-02)
+
+
+### Features
+
+* **cli:** update log-update package to version 6.1.0 ([ddf9559](https://github.com/lakutata/lakutata-packages/commit/ddf9559e8f7cca167ad3a22e58a03dbd983ccdc4))
+
+
+
+
+
 # [2.5.0](https://github.com/lakutata/lakutata-packages/compare/@lakutata/cli@2.4.1...@lakutata/cli@2.5.0) (2024-08-02)
 
 
