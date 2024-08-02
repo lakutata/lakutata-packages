@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.7.0](https://github.com/lakutata/lakutata-packages/compare/@lakutata/cli@2.6.1...@lakutata/cli@2.7.0) (2024-08-02)
+
+
+### Features
+
+* Add import statement for 'latest-version' package in OnlineLatestVersion.ts ([503a8af](https://github.com/lakutata/lakutata-packages/commit/503a8af2c748b2bc5f5090e44a202f04f5363baf))
+* **cli:** update log-update package import in Spinner component ([4137ffb](https://github.com/lakutata/lakutata-packages/commit/4137ffb164e1197354443e0fc997bf5c66a8486d))
+
+
+
+
+
 ## [2.6.1](https://github.com/lakutata/lakutata-packages/compare/@lakutata/cli@2.6.0...@lakutata/cli@2.6.1) (2024-08-02)
 
 **Note:** Version bump only for package @lakutata/cli
