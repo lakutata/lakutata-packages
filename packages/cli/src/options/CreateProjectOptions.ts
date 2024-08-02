@@ -49,9 +49,9 @@ export class CreateProjectOptions extends DTO {
             .strict(false)
             .optional()
             .default(false)
-            .description('initialize project only in specified directory without creating a new folder (default: false)')
+            .description('initialize the project within an existing folder (default: false)')
     )
-    public initOnly: boolean
+    public overwrite: boolean
 
     @Expect(
         DTO

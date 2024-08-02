@@ -93,7 +93,7 @@ export class Creator extends Provider {
         const authorName: string = options.author
         const licenseName: string = options.license
         const appType: string = options.type
-        const targetPath: string = options.initOnly ? path.resolve(options.path) : path.resolve(options.path, options.name)
+        const targetPath: string = options.overwrite ? path.resolve(options.path) : path.resolve(options.path, options.name)
         const {branch} = ProjectTypeConfig[appType]
         const table: CLITable.Table = new CLITable()
         table.push(
@@ -102,7 +102,7 @@ export class Creator extends Provider {
             [ansis.blue('APP Name'), appName],
             [ansis.blue('APP Description'), appDescription],
             [ansis.blue('Project Create Target Path'), targetPath],
-            [ansis.blue('Project Create Mode'), options.initOnly ? ansis.yellow('Initialize project in an existing directory') : ansis.green('Create a new folder for the project')],
+            [ansis.blue('Project Create Mode'), options.overwrite ? ansis.yellow('Initialize project in an existing directory') : ansis.green('Create a new folder for the project')],
             [ansis.blue('Project Author Name'), authorName],
             [ansis.blue('Project License'), licenseName],
             [ansis.blue('Project Template Branch'), this.puller.getGitSource(branch)]
@@ -120,7 +120,7 @@ export class Creator extends Provider {
             }, 1000)
             this.spinner.start((): string => `Please confirm the project creation information; the creation process will commence in ${timeLeft} seconds.`)
         })
-        await this.checkTargetPathExistence(targetPath, options.initOnly)
+        await this.checkTargetPathExistence(targetPath, options.overwrite)
         await this.checkTargetPathIsDirectory(targetPath)
         await this.checkTargetDirectoryIsEmpty(targetPath)
         this.spinner.start('Pulling')
