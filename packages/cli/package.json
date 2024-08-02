@@ -40,7 +40,8 @@
     "latest-version": "^9.0.0",
     "log-update": "^6.0.0",
     "pkg-dir": "^8.0.0",
-    "semver": "^7.6.0"
+    "semver": "^7.6.0",
+    "lakutata": "^2.0.11"
   },
   "devDependencies": {
     "@types/degit": "^2.8.6"
