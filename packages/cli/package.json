@@ -1,6 +1,6 @@
 {
   "name": "@lakutata/cli",
-  "version": "2.4.0",
+  "version": "2.4.1",
   "description": "Lakutata CLI tool",
   "keywords": [
     "lakutata",
@@ -37,11 +37,11 @@
     "commander": "^12.0.0",
     "degit": "^2.8.4",
     "execa": "^8.0.1",
+    "lakutata": "^2.0.11",
     "latest-version": "^9.0.0",
     "log-update": "^6.0.0",
     "pkg-dir": "^8.0.0",
-    "semver": "^7.6.0",
-    "lakutata": "^2.0.11"
+    "semver": "^7.6.0"
   },
   "devDependencies": {
     "@types/degit": "^2.8.6"
