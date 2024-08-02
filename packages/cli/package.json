@@ -24,7 +24,8 @@
     "clean": "shx rm -rf ./dist",
     "build": "tsc",
     "rebuild": "npm run clean && npm run build",
-    "test": "tsx src/CLIApp.ts info"
+    "test:info": "tsx src/CLIApp.ts info",
+    "test:create": "tsx src/CLIApp.ts create --help"
   },
   "bugs": {
     "url": "https://github.com/lakutata/lakutata-packages/issues"

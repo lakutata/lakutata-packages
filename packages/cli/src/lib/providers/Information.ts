@@ -36,7 +36,6 @@ export class Information extends Provider {
      * @protected
      */
     protected async init(): Promise<void> {
-        // const {packageDirectory} = require('pkg-dir')
         const {packageDirectory} = await import('pkg-dir')
         this.packageDirectory = packageDirectory
         const installPath: string | undefined = await packageDirectory({cwd: this.currentDirectory})
