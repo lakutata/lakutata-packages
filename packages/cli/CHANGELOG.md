@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.11.0](https://github.com/lakutata/lakutata-packages/compare/@lakutata/cli@2.10.0...@lakutata/cli@2.11.0) (2024-08-03)
+
+
+### Features
+
+* **cli:** add 'templates' command to list available project templates ([c04ba99](https://github.com/lakutata/lakutata-packages/commit/c04ba9923d78623418aeb519c952ed5e0ec7d969))
+
+
+
+
+
 # [2.10.0](https://github.com/lakutata/lakutata-packages/compare/@lakutata/cli@2.9.0...@lakutata/cli@2.10.0) (2024-08-03)
 
 
