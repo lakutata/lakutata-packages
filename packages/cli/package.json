@@ -25,6 +25,7 @@
     "build": "tsc",
     "rebuild": "npm run clean && npm run build",
     "test:info": "tsx src/CLIApp.ts info",
+    "test:templates": "tsx src/CLIApp.ts templates",
     "test:create": "tsx src/CLIApp.ts create --help"
   },
   "bugs": {
@@ -40,6 +41,7 @@
     "lakutata": "^2.0.11",
     "latest-version": "^9.0.0",
     "log-update": "^6.1.0",
+    "node-fetch-native": "^1.6.4",
     "pkg-dir": "^8.0.0",
     "semver": "^7.6.0"
   },

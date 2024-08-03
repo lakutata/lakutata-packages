@@ -24,69 +24,81 @@ import {
 } from 'lakutata/com/entrypoint'
 import * as console from 'node:console'
 import {OnlineLatestVersion} from './lib/providers/OnlineLatestVersion'
+import {TemplateManager} from './lib/providers/TemplateManager'
+import path from 'node:path'
 
-Application.run(async (): Promise<ApplicationOptions> => ({
-    id: 'cli.lakutata.app',
-    name: 'Lakutata-CLI',
-    components: {
-        puller: {
-            class: DeGitPuller,
-            cache: false,
-            verbose: true,
-            force: true,
-            baseRepo: 'lakutata/lakutata-template'
-        },
-        spinner: {
-            class: Spinner,
-            style: dots
-        },
-        entrypoint: BuildEntrypoints({
-            controllers: [CommandLineController],
-            cli: BuildCLIEntrypoint((module: Module, cliMap: CLIMap, handler: CLIEntrypointHandler, registerDestroy: EntrypointDestroyerRegistrar) => {
-                const CLIProgram: Command = new Command()
-                cliMap.forEach((dtoJsonSchema: JSONSchema, command: string): void => {
-                    const cmd: Command = new Command(command).description(dtoJsonSchema.description!)
-                    for (const property in dtoJsonSchema.properties) {
-                        const attr: JSONSchema = dtoJsonSchema.properties[property]
-                        const optionsArgs: [string, string | undefined] = [`--${property} <${attr.type}>`, attr.description]
-                        if (Array.isArray(dtoJsonSchema.required) && dtoJsonSchema.required.includes(property)) {
-                            optionsArgs[1] = `(required) ${optionsArgs[1]}`
-                            cmd.requiredOption(...optionsArgs)
-                        } else {
-                            cmd.option(...optionsArgs)
+Application
+    .alias({
+        '@packageJson': path.resolve(__dirname, '../package.json'),
+        '@data': path.resolve(__dirname, '../node_modules/.data')
+    }, true)
+    .run(async (): Promise<ApplicationOptions> => ({
+        id: 'cli.lakutata.app',
+        name: 'Lakutata-CLI',
+        components: {
+            puller: {
+                class: DeGitPuller,
+                cache: false,
+                verbose: true,
+                force: true,
+                baseRepo: 'lakutata/lakutata-template'
+            },
+            spinner: {
+                class: Spinner,
+                style: dots
+            },
+            entrypoint: BuildEntrypoints({
+                controllers: [CommandLineController],
+                cli: BuildCLIEntrypoint((module: Module, cliMap: CLIMap, handler: CLIEntrypointHandler, registerDestroy: EntrypointDestroyerRegistrar) => {
+                    const CLIProgram: Command = new Command()
+                    cliMap.forEach((dtoJsonSchema: JSONSchema, command: string): void => {
+                        const cmd: Command = new Command(command).description(dtoJsonSchema.description!)
+                        for (const property in dtoJsonSchema.properties) {
+                            const attr: JSONSchema = dtoJsonSchema.properties[property]
+                            const optionsArgs: [string, string | undefined] = [`--${property} <${attr.type}>`, attr.description]
+                            if (Array.isArray(dtoJsonSchema.required) && dtoJsonSchema.required.includes(property)) {
+                                optionsArgs[1] = `(required) ${optionsArgs[1]}`
+                                cmd.requiredOption(...optionsArgs)
+                            } else {
+                                cmd.option(...optionsArgs)
+                            }
                         }
-                    }
-                    cmd.action(async (args): Promise<any> => await handler(new CLIContext({
-                        command: command,
-                        data: args
-                    })))
-                    CLIProgram.addCommand(cmd)
+                        cmd.action(async (args): Promise<any> => await handler(new CLIContext({
+                            command: command,
+                            data: args
+                        })))
+                        CLIProgram.addCommand(cmd)
+                    })
+                    CLIProgram.parse()
                 })
-                CLIProgram.parse()
             })
-        })
-    },
-    providers: {
-        creator: {
-            class: Creator
         },
-        info: {
-            class: Information,
-            name: packageName,
-            version: packageVersion,
-            description: packageDescription,
-            license: packageLicense,
-            currentDirectory: __dirname,
-            workingDirectory: process.cwd()
+        providers: {
+            creator: {
+                class: Creator
+            },
+            info: {
+                class: Information,
+                name: packageName,
+                version: packageVersion,
+                description: packageDescription,
+                license: packageLicense,
+                currentDirectory: __dirname,
+                workingDirectory: process.cwd()
+            },
+            onlineVersion: {
+                class: OnlineLatestVersion,
+                name: packageName,
+                version: packageVersion
+            },
+            templateManager: {
+                class: TemplateManager,
+                apiHost: 'https://api.github.com',
+                repoPrefix: 'lakutata-template'
+            }
         },
-        onlineVersion: {
-            class: OnlineLatestVersion,
-            name: packageName,
-            version: packageVersion
-        }
-    },
-    bootstrap: ['entrypoint']
-}))
+        bootstrap: ['entrypoint']
+    }))
     .onUncaughtException((error: Error) => {
         console.error(`error: ${error.message}`)
         return process.exit(1)
