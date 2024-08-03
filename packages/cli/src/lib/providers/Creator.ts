@@ -118,7 +118,7 @@ export class Creator extends Provider {
             [ansis.blue('Project Create Mode'), options.overwrite ? ansis.yellow('Initialize project in an existing directory') : ansis.green('Create a new folder for the project')],
             [ansis.blue('Project Author Name'), authorName],
             [ansis.blue('Project License'), licenseName],
-            [ansis.blue('Project Template Branch'), this.puller.getGitSource(appTemplate)]
+            [ansis.blue('Project Template Repository'), this.puller.getGitSource(appTemplate)]
         )
         console.log(table.toString())
         await new Promise<void>(resolve => {
