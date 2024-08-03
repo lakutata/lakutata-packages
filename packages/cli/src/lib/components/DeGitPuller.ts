@@ -16,14 +16,14 @@ export class DeGitPuller extends Component {
     protected readonly force: boolean = true
 
     @Configurable(DTO.String().required())
-    protected readonly repo: string
+    protected readonly baseRepo: string
 
     /**
      * get git source
-     * @param branch
+     * @param template
      */
-    public getGitSource(branch: string): string {
-        return `${this.repo}#${branch}`
+    public getGitSource(template: string): string {
+        return `${this.baseRepo}-${template}`
     }
 
     /**

@@ -34,7 +34,7 @@ Application.run(async (): Promise<ApplicationOptions> => ({
             cache: false,
             verbose: true,
             force: true,
-            repo: 'lakutata/lakutata-template'
+            baseRepo: 'lakutata/lakutata-template'
         },
         spinner: {
             class: Spinner,

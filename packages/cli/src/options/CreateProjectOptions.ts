@@ -29,10 +29,9 @@ export class CreateProjectOptions extends DTO {
         DTO
             .String()
             .required()
-            .valid(...Object.keys(ProjectTypeConfig))
-            .description(`select the type of the project (choices: ${Object.keys(ProjectTypeConfig).map((type: string): string => `"${type}"`).join(',')})`)
+            .description('choose a template for this project')
     )
-    public type: string
+    public template: string
 
     @Expect(
         DTO

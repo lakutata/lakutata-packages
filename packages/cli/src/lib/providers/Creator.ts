@@ -104,12 +104,10 @@ export class Creator extends Provider {
         const appName: string = options.name
         const appId: string = options.id
         const appDescription: string = options.description
-        // const packageName: string = appId
         const authorName: string = options.author
         const licenseName: string = options.license
-        const appType: string = options.type
+        const appTemplate: string = options.template
         const targetPath: string = options.overwrite ? path.resolve(options.path) : path.resolve(options.path, options.name)
-        const {branch} = ProjectTypeConfig[appType]
         const table: CLITable.Table = new CLITable()
         table.push(
             [{content: ansis.bold.cyan('Project Creation Information'), colSpan: 2, hAlign: 'center'}],
@@ -120,7 +118,7 @@ export class Creator extends Provider {
             [ansis.blue('Project Create Mode'), options.overwrite ? ansis.yellow('Initialize project in an existing directory') : ansis.green('Create a new folder for the project')],
             [ansis.blue('Project Author Name'), authorName],
             [ansis.blue('Project License'), licenseName],
-            [ansis.blue('Project Template Branch'), this.puller.getGitSource(branch)]
+            [ansis.blue('Project Template Branch'), this.puller.getGitSource(appTemplate)]
         )
         console.log(table.toString())
         await new Promise<void>(resolve => {
@@ -139,7 +137,7 @@ export class Creator extends Provider {
         await this.checkTargetPathIsDirectory(targetPath)
         await this.checkTargetDirectoryIsEmpty(targetPath)
         this.spinner.start('Pulling')
-        await this.puller.pull(branch, targetPath)
+        await this.puller.pull(appTemplate, targetPath)
         this.spinner.stop()
         this.log.info(`${charCheck} Template pulled.`)
         this.spinner.start('Filling information')
