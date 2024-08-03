@@ -134,6 +134,6 @@ export class TemplateManager extends Provider {
             })
         )
         console.log(table.toString())
-        console.log(`${ansis.gray('Template list last updated on:')} ${ansis.gray(new Time(updatedAt).format('YYYY-MM-DD HH:mm:ss'))}`)
+        console.log(`Template list last updated on: ${ansis.bold(new Time(updatedAt).format('YYYY-MM-DD HH:mm:ss'))}`)
     }
 }
