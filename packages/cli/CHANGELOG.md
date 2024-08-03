@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.9.0](https://github.com/lakutata/lakutata-packages/compare/@lakutata/cli@2.8.0...@lakutata/cli@2.9.0) (2024-08-03)
+
+
+### Features
+
+* **cli:** add template selection for project creation ([4835107](https://github.com/lakutata/lakutata-packages/commit/4835107d86bd70738a6508529e9d60efa807c356))
+
+
+
+
+
 # [2.8.0](https://github.com/lakutata/lakutata-packages/compare/@lakutata/cli@2.7.0...@lakutata/cli@2.8.0) (2024-08-02)
 
 
