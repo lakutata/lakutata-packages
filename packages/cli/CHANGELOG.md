@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.12.0](https://github.com/lakutata/lakutata-packages/compare/@lakutata/cli@2.11.1...@lakutata/cli@2.12.0) (2024-08-08)
+
+
+### Features
+
+* add initOnly parameter to checkTargetDirectoryIsEmpty method in Creator.ts ([bcd304c](https://github.com/lakutata/lakutata-packages/commit/bcd304c957ae93651e4dc8d1cdbc8b5d2be13fee))
+
+
+
+
+
 ## [2.11.1](https://github.com/lakutata/lakutata-packages/compare/@lakutata/cli@2.11.0...@lakutata/cli@2.11.1) (2024-08-04)
 
 **Note:** Version bump only for package @lakutata/cli
