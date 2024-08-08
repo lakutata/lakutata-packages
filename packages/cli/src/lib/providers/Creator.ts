@@ -68,11 +68,12 @@ export class Creator extends Provider {
     /**
      * Check target directory is empty, if the target directory is not empty, throw error and exit
      * @param targetDirectory
+     * @param initOnly
      * @protected
      */
-    protected async checkTargetDirectoryIsEmpty(targetDirectory: string): Promise<void> {
+    protected async checkTargetDirectoryIsEmpty(targetDirectory: string, initOnly: boolean): Promise<void> {
         const files: string[] = await readdir(targetDirectory)
-        if (files.length) {
+        if (files.length && !initOnly) {
             this.log.error(`${charCross} The target directory is not empty.`)
             return this.app.exit(1)
         }
@@ -134,7 +135,7 @@ export class Creator extends Provider {
         })
         await this.checkTargetPathExistence(targetPath, options.overwrite)
         await this.checkTargetPathIsDirectory(targetPath)
-        await this.checkTargetDirectoryIsEmpty(targetPath)
+        await this.checkTargetDirectoryIsEmpty(targetPath, options.overwrite)
         this.spinner.start('Pulling')
         await this.puller.pull(appTemplate, targetPath)
         this.spinner.stop()
