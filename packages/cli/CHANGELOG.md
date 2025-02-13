@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.12.1](https://github.com/lakutata/lakutata-packages/compare/@lakutata/cli@2.12.0...@lakutata/cli@2.12.1) (2025-02-13)
+
+**Note:** Version bump only for package @lakutata/cli
+
+
+
+
+
 # [2.12.0](https://github.com/lakutata/lakutata-packages/compare/@lakutata/cli@2.11.1...@lakutata/cli@2.12.0) (2024-08-08)
 
 
