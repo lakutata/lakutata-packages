@@ -11,7 +11,7 @@ export class CreateProjectOptions extends DTO {
         DTO
             .String()
             .required()
-            .pattern(/^(\w+\.?)*\w+$/)
+            .pattern(/^([a-zA-Z0-9_-]+\.?)*[a-zA-Z0-9_-]+$/)
             .description('Specify the name of the application')
     )
     public name: string
