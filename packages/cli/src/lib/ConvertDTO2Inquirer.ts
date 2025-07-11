@@ -22,7 +22,7 @@ export async function ConvertDTO2Inquirer<InputDTO extends typeof DTO>(dto: Inpu
             case 'string':
             default: {
                 if (propertyInfo.enum) {
-                    const enums: string[] = propertyInfo.enum
+                    const enums: string[] = propertyInfo.enum.filter(value => !!value)
                     prompts.push({
                         name: propertyName,
                         type: 'list',

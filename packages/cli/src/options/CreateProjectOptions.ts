@@ -3,6 +3,9 @@ import {Expect} from 'lakutata/decorator/dto'
 import process from 'node:process'
 import {ListTemplateNames} from '../lib/ListTemplateNames'
 
+const templateNames: string[] = ListTemplateNames()
+if (!templateNames.length) templateNames.push('')
+
 /**
  * Create project options
  */
@@ -29,7 +32,7 @@ export class CreateProjectOptions extends DTO {
         DTO
             .String()
             .required()
-            .allow(...ListTemplateNames())
+            .allow(...templateNames)
             .only()
             .description('Choose a template for this project')
     )
