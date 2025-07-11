@@ -6,6 +6,7 @@ export async function ConvertDTO2Inquirer<InputDTO extends typeof DTO>(dto: Inpu
     const prompts: any[] = []
     for (const propertyName in jsonSchema.properties) {
         const propertyInfo = jsonSchema.properties[propertyName]
+
         const propertyRequired: boolean = Array.isArray(jsonSchema.required) && jsonSchema.required.includes(propertyName)
         switch (propertyInfo.type) {
             case 'boolean': {
@@ -30,8 +31,7 @@ export async function ConvertDTO2Inquirer<InputDTO extends typeof DTO>(dto: Inpu
                         choices: enums.map((value: string): { name: string; value: string } => ({
                             name: value,
                             value: value
-                        })),
-                        validate: (input: string): boolean => enums.includes(input)
+                        }))
                     })
                 } else {
                     prompts.push({
