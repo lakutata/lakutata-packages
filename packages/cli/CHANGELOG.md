@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.14.4](https://github.com/lakutata/lakutata-packages/compare/@lakutata/cli@2.14.3...@lakutata/cli@2.14.4) (2025-07-11)
+
+
+### Bug Fixes
+
+* **cli:** filter empty enum values in DTO conversion ([2cece51](https://github.com/lakutata/lakutata-packages/commit/2cece5156b0b6eea4524a888e1bc89d1abc8c16b))
+
+
+
+
+
 ## [2.14.3](https://github.com/lakutata/lakutata-packages/compare/@lakutata/cli@2.14.2...@lakutata/cli@2.14.3) (2025-07-11)
 
 
