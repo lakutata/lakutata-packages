@@ -8,7 +8,6 @@ import {ListTemplatesOptions} from '../options/ListTemplatesOptions'
 import {TemplateManager} from '../lib/providers/TemplateManager'
 import {CreateProjectOptions} from '../options/CreateProjectOptions'
 import {ConvertDTO2Inquirer} from '../lib/ConvertDTO2Inquirer'
-import * as process from 'node:process'
 
 export class CommandLineController extends Controller {
 
@@ -26,7 +25,6 @@ export class CommandLineController extends Controller {
      */
     @CLIAction('create', DTO.description('create a Lakutata project'))
     public async create(): Promise<void> {
-        process.env.LAKUTATA_TEMPLATE_NAMES = JSON.stringify(await this.templateManager.listNames())
         await this.projectCreator.create(await ConvertDTO2Inquirer(CreateProjectOptions))
     }
 

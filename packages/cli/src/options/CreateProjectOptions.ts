@@ -2,11 +2,14 @@ import {DTO} from 'lakutata'
 import {Expect} from 'lakutata/decorator/dto'
 import process from 'node:process'
 
+function templateNames() {
+    return process.env.LAKUTATA_TEMPLATE_NAMES ? JSON.parse(process.env.LAKUTATA_TEMPLATE_NAMES) : []
+}
+
 /**
  * Create project options
  */
 export class CreateProjectOptions extends DTO {
-
     @Expect(
         DTO
             .String()
@@ -29,7 +32,7 @@ export class CreateProjectOptions extends DTO {
         DTO
             .String()
             .required()
-            .allow(() => ([...JSON.parse(process.env.LAKUTATA_TEMPLATE_NAMES!)]))
+            .allow(...templateNames())
             .only()
             .description('Choose a template for this project')
     )

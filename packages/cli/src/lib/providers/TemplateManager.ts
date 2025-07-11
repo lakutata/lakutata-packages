@@ -41,15 +41,7 @@ export class TemplateManager extends Provider {
     @Configurable(DTO.String().required())
     protected readonly repoPrefix: string
 
-    protected readonly localDataFilename: string = path.resolve('@data', 'templates.db')
-
-    /**
-     * Initializer
-     * @protected
-     */
-    protected async init(): Promise<void> {
-
-    }
+    protected readonly localDataFilename: string = path.resolve('@localDataFilename')
 
     /**
      * Fetch template repository list from remote
@@ -109,21 +101,6 @@ export class TemplateManager extends Provider {
             await writeFile(this.localDataFilename, JSON.stringify(cache), {flag: 'w'})
         }
         this.printTemplates(cache.templates, cache.updatedAt)
-    }
-
-    public async listNames() {
-        const {version} = JSON.parse(await readFile(path.resolve('@packageJson'), {encoding: 'utf-8'}))
-        const isLocalDataExists: boolean = await IsExists(this.localDataFilename)
-        let cache: localTemplateInfoCache = {
-            templates: [],
-            version: version,
-            updatedAt: Time.now()
-        }
-        if (isLocalDataExists) {
-            cache = JSON.parse(await readFile(this.localDataFilename, {encoding: 'utf-8'}))
-        }
-        if (!cache) return []
-        return cache.templates.map(template => template.name)
     }
 
     /**

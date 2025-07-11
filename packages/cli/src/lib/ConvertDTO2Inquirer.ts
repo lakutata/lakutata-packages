@@ -2,7 +2,7 @@ import {ActionPattern, DTO} from 'lakutata'
 import inquirer from 'inquirer'
 
 export async function ConvertDTO2Inquirer<InputDTO extends typeof DTO>(dto: InputDTO): Promise<ActionPattern<any>> {
-    const jsonSchema = dto.toJsonSchema()
+    const jsonSchema = dto.toOpenAPIJsonSchema()
     const prompts: any[] = []
     for (const propertyName in jsonSchema.properties) {
         const propertyInfo = jsonSchema.properties[propertyName]
@@ -20,8 +20,8 @@ export async function ConvertDTO2Inquirer<InputDTO extends typeof DTO>(dto: Inpu
                 break
             case 'string':
             default: {
-                if (propertyInfo.const) {
-                    const enums: string[] = propertyInfo.const()
+                if (propertyInfo.enum) {
+                    const enums: string[] = propertyInfo.enum
                     prompts.push({
                         name: propertyName,
                         type: 'list',
