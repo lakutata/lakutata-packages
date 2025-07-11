@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.14.3](https://github.com/lakutata/lakutata-packages/compare/@lakutata/cli@2.14.2...@lakutata/cli@2.14.3) (2025-07-11)
+
+
+### Bug Fixes
+
+* **cli:** remove redundant enum validation in ConvertDTO2Inquirer ([cc528b8](https://github.com/lakutata/lakutata-packages/commit/cc528b812c29cbc2de541d21af5283b53848c149))
+
+
+
+
+
 ## [2.14.2](https://github.com/lakutata/lakutata-packages/compare/@lakutata/cli@2.14.1...@lakutata/cli@2.14.2) (2025-07-11)
 
 **Note:** Version bump only for package @lakutata/cli
