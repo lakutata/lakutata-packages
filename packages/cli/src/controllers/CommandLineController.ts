@@ -1,13 +1,14 @@
-import {CreateProjectOptions} from '../options/CreateProjectOptions'
-import {LakutataInfoOptions} from '../options/LakutataInfoOptions'
 import {Information} from '../lib/providers/Information'
 import {Creator} from '../lib/providers/Creator'
-import {type ActionPattern} from 'lakutata'
+import {type ActionPattern, DTO} from 'lakutata'
 import {Inject} from 'lakutata/decorator/di'
 import {CLIAction} from 'lakutata/decorator/ctrl'
 import {Controller} from 'lakutata/com/entrypoint'
 import {ListTemplatesOptions} from '../options/ListTemplatesOptions'
 import {TemplateManager} from '../lib/providers/TemplateManager'
+import {CreateProjectOptions} from '../options/CreateProjectOptions'
+import {ConvertDTO2Inquirer} from '../lib/ConvertDTO2Inquirer'
+import * as process from 'node:process'
 
 export class CommandLineController extends Controller {
 
@@ -22,11 +23,11 @@ export class CommandLineController extends Controller {
 
     /**
      * Create project
-     * @param inp
      */
-    @CLIAction('create', CreateProjectOptions.description('create a Lakutata project'))
-    public async create(inp: ActionPattern<CreateProjectOptions>): Promise<void> {
-        await this.projectCreator.create(inp)
+    @CLIAction('create', DTO.description('create a Lakutata project'))
+    public async create(): Promise<void> {
+        process.env.LAKUTATA_TEMPLATE_NAMES = JSON.stringify(await this.templateManager.listNames())
+        await this.projectCreator.create(await ConvertDTO2Inquirer(CreateProjectOptions))
     }
 
     /**
@@ -40,10 +41,9 @@ export class CommandLineController extends Controller {
 
     /**
      * Show framework info
-     * @param inp
      */
-    @CLIAction('info', LakutataInfoOptions.description('show Lakutata framework info'))
-    public async info(inp: ActionPattern<LakutataInfoOptions>): Promise<void> {
+    @CLIAction('info', DTO.description('show Lakutata framework info'))
+    public async info(): Promise<void> {
         await this.frameworkInfo.print()
     }
 }

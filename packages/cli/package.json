@@ -24,9 +24,10 @@
     "clean": "shx rm -rf ./dist",
     "build": "tsc",
     "rebuild": "npm run clean && npm run build",
-    "test:info": "tsx src/CLIApp.ts info",
-    "test:templates": "tsx src/CLIApp.ts templates",
-    "test:create": "tsx src/CLIApp.ts create --help"
+    "test": "bun src/CLIApp.ts",
+    "test:info": "bun src/CLIApp.ts info",
+    "test:templates": "bun src/CLIApp.ts templates",
+    "test:create": "bun src/CLIApp.ts create"
   },
   "bugs": {
     "url": "https://github.com/lakutata/lakutata-packages/issues"
@@ -38,6 +39,7 @@
     "commander": "^12.0.0",
     "degit": "^2.8.4",
     "execa": "^8.0.1",
+    "inquirer": "^12.7.0",
     "lakutata": "^2.0.13",
     "latest-version": "^9.0.0",
     "log-update": "^6.1.0",

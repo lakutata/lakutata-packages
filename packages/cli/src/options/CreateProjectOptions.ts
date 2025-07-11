@@ -1,5 +1,6 @@
 import {DTO} from 'lakutata'
 import {Expect} from 'lakutata/decorator/dto'
+import process from 'node:process'
 
 /**
  * Create project options
@@ -11,7 +12,7 @@ export class CreateProjectOptions extends DTO {
             .String()
             .required()
             .pattern(/^(\w+\.?)*\w+$/)
-            .description('specify the name of the project and application')
+            .description('Specify the name of the application')
     )
     public name: string
 
@@ -20,7 +21,7 @@ export class CreateProjectOptions extends DTO {
             .String()
             .required()
             .pattern(/^(@[a-z0-9-~][a-z0-9-._~]*\/)?[a-z0-9-~][a-z0-9-._~]*$/)//Match package json name regex
-            .description('specify the ID of the application')
+            .description('Specify the ID of the application')
     )
     public id: string
 
@@ -28,7 +29,9 @@ export class CreateProjectOptions extends DTO {
         DTO
             .String()
             .required()
-            .description('choose a template for this project')
+            .allow(() => ([...JSON.parse(process.env.LAKUTATA_TEMPLATE_NAMES!)]))
+            .only()
+            .description('Choose a template for this project')
     )
     public template: string
 
@@ -37,7 +40,7 @@ export class CreateProjectOptions extends DTO {
             .String()
             .optional()
             .default(process.cwd())
-            .description(`specify the path for creating the project (default: "${process.cwd()}")`)
+            .description('Specify the path for creating the project')
     )
     public path: string
 
@@ -47,7 +50,7 @@ export class CreateProjectOptions extends DTO {
             .strict(false)
             .optional()
             .default(false)
-            .description('initialize the project within an existing folder (default: false)')
+            .description('Initialize the project within an existing folder')
     )
     public overwrite: boolean
 
@@ -56,7 +59,7 @@ export class CreateProjectOptions extends DTO {
             .String()
             .optional()
             .default('none')
-            .description('specify the description of the application (default: "none")')
+            .description('Specify the description of the application')
     )
     public description: string
 
@@ -65,7 +68,7 @@ export class CreateProjectOptions extends DTO {
             .String()
             .optional()
             .default('Anonymous')
-            .description('specify the name of the author of the application (default: "Anonymous")')
+            .description('Specify the name of the author of the application')
     )
     public author: string
 
@@ -74,7 +77,7 @@ export class CreateProjectOptions extends DTO {
             .String()
             .optional()
             .default('UNLICENSED')
-            .description('specify the name of the license for the application (default: "UNLICENSED")')
+            .description('Specify the name of the license for the application')
     )
     public license: string
 }

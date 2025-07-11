@@ -122,7 +122,7 @@ export class Creator extends Provider {
         )
         console.log(table.toString())
         await new Promise<void>(resolve => {
-            let timeLeft: number = 15
+            let timeLeft: number = 10
             const interval: NodeJS.Timeout = setInterval((): void => {
                 timeLeft -= 1
                 if (!timeLeft) {

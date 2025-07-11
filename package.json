@@ -5,6 +5,7 @@
     "packages/*"
   ],
   "scripts": {
+    "postinstall": "lerna run rebuild",
     "publish": "lerna run rebuild && lerna publish --no-push"
   },
   "devDependencies": {
@@ -12,7 +13,7 @@
     "@typescript-eslint/eslint-plugin": "^7.6.0",
     "@typescript-eslint/parser": "^7.6.0",
     "eslint": "^8.57.0",
-    "lakutata": "^2.0.11",
+    "lakutata": "^2.0.41",
     "lerna": "^8.1.2",
     "reflect-metadata": "^0.2.2",
     "shx": "^0.3.4",
