@@ -1,28 +1,19 @@
 #!/usr/bin/env node
 
-import * as console from 'node:console'
+import {GetDataDirectory} from './lib/GetDataDirectory'
 import path from 'node:path'
-import {ListTemplateNames} from './lib/ListTemplateNames'
+import * as console from 'node:console'
 import process from 'node:process'
+import {Application} from 'lakutata'
+import {Config} from './config/Config'
 
-const dataDir: string = path.resolve(__dirname, '../node_modules/.data')
-const localDataFilename: string = path.resolve(dataDir, 'templates.db')
-ListTemplateNames(localDataFilename).then(async (templateNames: string[]): Promise<void> => {
-    process.env.LAKUTATA_TEMPLATE_NAMES = JSON.stringify(templateNames)
-    const {Config} = require('./config/Config')
-    const {Application} = await import('lakutata')
-    Application
-        .alias({
-            '@packageJson': path.resolve(__dirname, '../package.json'),
-            '@data': dataDir,
-            '@localDataFilename': localDataFilename
-        }, true)
-        .env({
-            LAKUTATA_TEMPLATE_NAMES: JSON.stringify(templateNames)
-        })
-        .run(Config)
-        .onUncaughtException((error: Error) => {
-            console.error(`error: ${error.message}`)
-            return process.exit(1)
-        })
-}).catch((): void => process.exit(1))
+Application
+    .alias({
+        '@packageJson': path.resolve(__dirname, '../package.json'),
+        '@data': GetDataDirectory()
+    }, true)
+    .run(Config)
+    .onUncaughtException((error: Error) => {
+        console.error(`error: ${error.message}`)
+        return process.exit(1)
+    })

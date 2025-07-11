@@ -11,6 +11,7 @@ import {Logger} from 'lakutata/com/logger'
 import {As, IsExists} from 'lakutata/helper'
 import {Spinner} from '../components/Spinner'
 import {readFile, writeFile} from 'node:fs/promises'
+import {GetLocalDataFilename} from '../GetLocalDataFilename'
 
 type TemplateInfo = {
     name: string
@@ -41,7 +42,7 @@ export class TemplateManager extends Provider {
     @Configurable(DTO.String().required())
     protected readonly repoPrefix: string
 
-    protected readonly localDataFilename: string = path.resolve('@localDataFilename')
+    protected readonly localDataFilename: string = GetLocalDataFilename()
 
     /**
      * Fetch template repository list from remote
