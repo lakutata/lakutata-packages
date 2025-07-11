@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.14.0](https://github.com/lakutata/lakutata-packages/compare/@lakutata/cli@2.13.0...@lakutata/cli@2.14.0) (2025-07-11)
+
+
+### Features
+
+* **cli:** refactor template management and DTO conversion ([7072c41](https://github.com/lakutata/lakutata-packages/commit/7072c4100419db43f00dc49cdfd9e48e0ec4cb0f))
+
+
+
+
+
 # 2.13.0 (2025-07-11)
 
 
