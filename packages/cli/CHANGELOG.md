@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.15.0](https://github.com/lakutata/lakutata-packages/compare/@lakutata/cli@2.14.4...@lakutata/cli@2.15.0) (2025-07-24)
+
+
+### Features
+
+* **dbus:** add DBus SDK package with client provider and test setup ([0bc9cd9](https://github.com/lakutata/lakutata-packages/commit/0bc9cd9f99374a57f3250ee9f540ace18be67f9c))
+
+
+
+
+
 ## [2.14.4](https://github.com/lakutata/lakutata-packages/compare/@lakutata/cli@2.14.3...@lakutata/cli@2.14.4) (2025-07-11)
 
 
