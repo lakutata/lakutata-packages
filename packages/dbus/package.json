@@ -1,0 +1,50 @@
+{
+  "name": "@lakutata/dbus",
+  "version": "2.0.0",
+  "description": "Lakutata DBus SDK",
+  "keywords": [
+    "lakutata",
+    "dbus",
+    "sdk"
+  ],
+  "author": "myq1991 <myq1991@gmail.com>",
+  "homepage": "https://github.com/lakutata/lakutata-packages",
+  "license": "MIT",
+  "exports": {
+    ".": {
+      "types": "./dist/CommonExports.d.ts",
+      "require": "./dist/CommonExports.js"
+    },
+    "./com": {
+      "types": "./dist/ComponentExports.d.ts",
+      "require": "./dist/ComponentExports.js"
+    },
+    "./provider": {
+      "types": "./dist/ProviderExports.d.ts",
+      "require": "./dist/ProviderExports.js"
+    }
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lakutata/lakutata-packages.git"
+  },
+  "scripts": {
+    "clean": "shx rm -rf ./dist",
+    "build": "tsc",
+    "rebuild": "npm run clean && npm run build",
+    "test": "bun src/tests/DBusTest.spec.ts"
+  },
+  "bugs": {
+    "url": "https://github.com/lakutata/lakutata-packages/issues"
+  },
+  "dependencies": {
+    "dbus-sdk": "^1.0.13",
+    "lakutata": "^2.0.53"
+  },
+  "devDependencies": {
+    "@types/degit": "^2.8.6"
+  }
+}
