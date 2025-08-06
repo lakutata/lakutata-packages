@@ -41,8 +41,8 @@
     "url": "https://github.com/lakutata/lakutata-packages/issues"
   },
   "dependencies": {
-    "dbus-sdk": "^1.0.13",
-    "lakutata": "^2.0.53"
+    "dbus-sdk": "^1.0.14",
+    "lakutata": "^2.0.55"
   },
   "devDependencies": {
     "@types/degit": "^2.8.6"
