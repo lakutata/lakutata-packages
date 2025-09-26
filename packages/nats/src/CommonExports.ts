@@ -1,5 +1,7 @@
 export {SetupNatsServiceEntrypoint} from './entrypoints/SetupNatsServiceEntrypoint'
 export {NATS, buildNatsClientOptions} from './components/NATS'
+export {JSONCodec} from './codecs/JSONCodec'
+export {StringCodec} from 'nats'
 export type {SubscribeOptions} from './types/SubscribeOptions'
 export type {Subscription, Codec} from 'nats'
 export type {NatsClientOptions} from './interfaces/NatsClientOptions'
@@ -9,4 +11,3 @@ export {NatsInternalServerException} from './exceptions/NatsInternalServerExcept
 export {NatsNoRespondersAvailableException} from './exceptions/NatsNoRespondersAvailableException'
 export {NatsNotFoundException} from './exceptions/NatsNotFoundException'
 export {NatsRequestTimeoutException} from './exceptions/NatsRequestTimeoutException'
-

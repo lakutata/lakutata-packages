@@ -14,6 +14,7 @@ import {NatsRequestTimeoutException} from '../exceptions/NatsRequestTimeoutExcep
 import {NatsNoRespondersAvailableException} from '../exceptions/NatsNoRespondersAvailableException'
 import {NatsInternalServerException} from '../exceptions/NatsInternalServerException'
 import {NatsClientOptions} from '../interfaces/NatsClientOptions'
+import {JSONCodec} from '../codecs/JSONCodec'
 
 export const buildNatsClientOptions: ComponentOptionsBuilder<NatsClientOptions> = (options: NatsClientOptions): ComponentOptions<NatsClientOptions> => {
     return {
@@ -50,7 +51,7 @@ export class NATS extends Component {
     @Configurable(DTO.Object({
         encode: DTO.Function().arity(1).required(),
         decode: DTO.Function().arity(1).required()
-    }).optional().default(StringCodec()))
+    }).optional().default(JSONCodec()))
     protected readonly codec: Codec<unknown>
 
     /**
@@ -208,7 +209,7 @@ export class NATS extends Component {
      */
     public async request(subject: string, payload?: any, timeout?: number): Promise<any> {
         try {
-            const response: Msg = await this.#conn.request(subject, payload, {timeout: timeout ? timeout : 0})
+            const response: Msg = await this.#conn.request(subject, this.codec.encode(payload), {timeout: timeout ? timeout : 0})
             return this.codec.decode(response.data)
         } catch (e: any) {
             if (e.code) {

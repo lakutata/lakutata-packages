@@ -17,7 +17,7 @@ export function SetupNatsServiceEntrypoint(natsComponentName: string): ServiceEn
         const nats: NATS = await module.getObject<NATS>(natsComponentName)
         nats.subscribe((module as Application).appId, async (incomeRequestPayload: any) => {
             return await handler(new ServiceContext({
-                data: JSON.parse(incomeRequestPayload)
+                data: incomeRequestPayload
             }))
         })
     })

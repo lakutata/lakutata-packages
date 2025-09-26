@@ -26,14 +26,27 @@ class TestComponent extends Component {
         //     this.nats.publish('test', 1234)
         //     console.log('res:', await this.nats.request('test-invoke', JSON.stringify({haha: true})), 1000000)
         // }, 1)
-        console.log(await this.nats.request(this.app.appId, JSON.stringify({test: true})))
+        console.log(await this.nats.request(this.app.appId, {test: true}))
     }
 }
 
 class TestController extends Controller {
     @ServiceAction({test: true})
     public async test(inp) {
-        return 'hahahah'
+        // return 'hahahah'
+        return {
+            test: true,
+            num: 1234,
+            sub: {
+                a: 1234,
+                b: '1234234',
+                c: [{test: true}]
+            }
+        }
+        // return ['hahahah']
+        // return {
+        //     test: 123456
+        // }
     }
 }
 
