@@ -1,0 +1,34 @@
+{
+  "name": "@lakutata/nats",
+  "version": "1.0.0",
+  "description": "Lakutata NATS Client",
+  "keywords": [
+    "lakutata",
+    "NATS",
+    "client"
+  ],
+  "author": "myq1991 <myq1991@gmail.com>",
+  "homepage": "https://github.com/lakutata/lakutata-packages",
+  "license": "Apache-2.0",
+  "main": "./dist/CommonExports.js",
+  "types": "./dist/CommonExports.d.ts",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lakutata/lakutata-packages.git"
+  },
+  "scripts": {
+    "clean": "shx rm -rf ./dist",
+    "build": "tsc",
+    "rebuild": "npm run clean && npm run build",
+    "test": "bun src/tests/NatsTest.spec.ts"
+  },
+  "bugs": {
+    "url": "https://github.com/lakutata/lakutata-packages/issues"
+  },
+  "dependencies": {
+    "nats": "^2.29.3"
+  }
+}
