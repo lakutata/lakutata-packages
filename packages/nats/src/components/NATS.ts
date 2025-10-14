@@ -244,16 +244,27 @@ export class NATS extends Component {
      * @param subscribeOptions
      */
     public subscribe(subject: string, callback: (data: any) => any | Promise<any>, subscribeOptions?: SubscribeOptions): Subscription {
-        return this.#conn.subscribe(subject, {
+        const subscription: Subscription = this.#conn.subscribe(subject, {
             queue: subscribeOptions?.queue,
-            max: subscribeOptions?.max,
-            callback: async (err: Error | null, msg: Msg): Promise<void> => {
+            max: subscribeOptions?.max
+        })
+        if (subscribeOptions?.iterator) {
+            setImmediate(async () => {
+                for await (const msg of subscription) {
+                    const data: any = this.codec.decode(msg.data)
+                    const result: any = await callback(data)
+                    msg.respond(this.codec.encode(result))
+                }
+            })
+        } else {
+            subscription.callback = async (err: Error | null, msg: Msg): Promise<void> => {
                 if (err) this.emit('error', err)
                 const data: any = this.codec.decode(msg.data)
                 const result: any = await callback(data)
                 msg.respond(this.codec.encode(result))
             }
-        })
+        }
+        return subscription
     }
 }
 

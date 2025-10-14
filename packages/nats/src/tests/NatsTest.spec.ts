@@ -3,6 +3,7 @@ import {BuildEntrypoints, Controller} from 'lakutata/com/entrypoint'
 import {Inject} from 'lakutata/decorator/di'
 import {SetupNatsServiceEntrypoint, NATS, buildNatsClientOptions} from '../CommonExports'
 import {ServiceAction} from 'lakutata/decorator/ctrl'
+import {Delay} from 'lakutata/helper'
 
 
 class TestComponent extends Component {
@@ -27,6 +28,14 @@ class TestComponent extends Component {
         //     console.log('res:', await this.nats.request('test-invoke', JSON.stringify({haha: true})), 1000000)
         // }, 1)
         console.log(await this.nats.request(this.app.appId, {test: true}))
+        this.nats.subscribe('test', async (inp) => {
+            console.log(inp)
+            await Delay(1000)
+        }, {iterator: true})
+
+        for (let i = 0; i < 1000; i++) {
+            this.nats.publish('test', i)
+        }
     }
 }
 
