@@ -1,10 +1,11 @@
 import {
+    Application,
     Component,
     ComponentOptions,
     ComponentOptionsBuilder,
     DTO
 } from 'lakutata'
-import {Configurable} from 'lakutata/decorator/di'
+import {Configurable, Inject} from 'lakutata/decorator/di'
 import {type Codec, StringCodec, connect, NatsConnection, Msg, Subscription} from 'nats'
 import {SubscribeOptions} from '../types/SubscribeOptions'
 import {NatsBadRequestException} from '../exceptions/NatsBadRequestException'
@@ -15,6 +16,7 @@ import {NatsNoRespondersAvailableException} from '../exceptions/NatsNoResponders
 import {NatsInternalServerException} from '../exceptions/NatsInternalServerException'
 import {NatsClientOptions} from '../interfaces/NatsClientOptions'
 import {JSONCodec} from '../codecs/JSONCodec'
+import {ServiceEventCodec, ServiceEventData} from '../lib/ServiceEventCodec'
 
 export const buildNatsClientOptions: ComponentOptionsBuilder<NatsClientOptions> = (options: NatsClientOptions): ComponentOptions<NatsClientOptions> => {
     return {
@@ -37,6 +39,13 @@ export const buildNatsClientOptions: ComponentOptionsBuilder<NatsClientOptions> 
 }
 
 export class NATS extends Component {
+    /**
+     * Application instance
+     * @protected
+     */
+    @Inject(Application)
+    protected readonly app: Application
+
     /**
      * NATS servers
      * @protected
@@ -153,6 +162,12 @@ export class NATS extends Component {
     protected readonly reconnect?: boolean
 
     /**
+     * Service event subscription map
+     * @protected
+     */
+    protected readonly serviceEventSubscriptionMap: Map<string, Map<(...args: any[]) => void, Subscription>> = new Map()
+
+    /**
      * NATS client instance
      * @private
      */
@@ -265,6 +280,73 @@ export class NATS extends Component {
             }
         }
         return subscription
+    }
+
+    /**
+     * Emit service event
+     * @param eventName
+     * @param args
+     */
+    public emitServiceEvent(eventName: string, ...args: any[]): this {
+        const eventSubject: string = ServiceEventCodec.formatSubject(this.app.appId, eventName)
+        this.publish(eventSubject, ServiceEventCodec.encode(args))
+        return this
+    }
+
+    /**
+     * On service event
+     * @param serviceId
+     * @param eventName
+     * @param listener
+     * @param onlySingleClientReceived
+     */
+    public onServiceEvent(serviceId: string, eventName: string, listener: (...args: any[]) => void, onlySingleClientReceived: boolean = false): this {
+        const eventSubject: string = ServiceEventCodec.formatSubject(serviceId, eventName)
+        if (!this.serviceEventSubscriptionMap.has(eventSubject)) this.serviceEventSubscriptionMap.set(eventSubject, new Map())
+        if (!this.serviceEventSubscriptionMap.get(eventSubject)?.has(listener)) {
+            const subscription: Subscription = this.subscribe(eventSubject, (eventData: ServiceEventData) => {
+                listener(...ServiceEventCodec.decode(eventData))
+            }, onlySingleClientReceived ? {queue: eventSubject} : void (0))
+            this.serviceEventSubscriptionMap.get(eventSubject)?.set(listener, subscription)
+        }
+        return this
+    }
+
+    /**
+     * Once service event
+     * @param serviceId
+     * @param eventName
+     * @param listener
+     */
+    public onceServiceEvent(serviceId: string, eventName: string, listener: (...args: any[]) => void): this {
+        const eventSubject: string = ServiceEventCodec.formatSubject(serviceId, eventName)
+        if (!this.serviceEventSubscriptionMap.has(eventSubject)) this.serviceEventSubscriptionMap.set(eventSubject, new Map())
+        if (!this.serviceEventSubscriptionMap.get(eventSubject)?.has(listener)) {
+            const subscription: Subscription = this.subscribe(eventSubject, (eventData: ServiceEventData) => {
+                this.serviceEventSubscriptionMap.get(eventSubject)?.delete(listener)
+                listener(...ServiceEventCodec.decode(eventData))
+            }, {max: 1})
+            this.serviceEventSubscriptionMap.get(eventSubject)?.set(listener, subscription)
+        }
+        return this
+    }
+
+    /**
+     * Off server events
+     * @param serviceId
+     * @param eventName
+     * @param listener
+     */
+    public offServiceEvent(serviceId: string, eventName: string, listener?: (...args: any[]) => void): this {
+        const eventSubject: string = ServiceEventCodec.formatSubject(serviceId, eventName)
+        if (listener) {
+            this.serviceEventSubscriptionMap.get(eventSubject)?.get(listener)?.unsubscribe()
+            this.serviceEventSubscriptionMap.get(eventSubject)?.delete(listener)
+        } else {
+            this.serviceEventSubscriptionMap.get(eventSubject)?.forEach((subscription: Subscription) => subscription.unsubscribe())
+            this.serviceEventSubscriptionMap.delete(eventSubject)
+        }
+        return this
     }
 }
 

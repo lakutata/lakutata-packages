@@ -46,6 +46,23 @@ class TestComponent extends Component {
         // for (let i = 0; i < 1000; i++) {
         //     this.nats.publish('test', i)
         // }
+        const handler1 = async (data) => {
+            console.log('data1:', data)
+            // this.nats.offServiceEvent(this.app.appId, 'testEvt', handler1)
+            // this.self.off('testEvt', handler1)
+        }
+        const handler2 = async (data) => {
+            console.log('data2:', data)
+            // this.nats.offServiceEvent(this.app.appId, 'testEvt', handler1)
+            // this.nats.offServiceEvent(this.app.appId, 'testEvt')
+        }
+        this.self.on('testEvt', handler1)
+        this.self.on('testEvt', handler2)
+        // this.nats.onServiceEvent(this.app.appId, 'testEvt', handler1)
+        // this.nats.onServiceEvent(this.app.appId, 'testEvt', handler2)
+        setInterval(() => {
+            this.nats.emitServiceEvent('testEvt', 123)
+        }, 1000)
         try {
             console.log(await this.self.invoke({test: true}))
         } catch (e) {

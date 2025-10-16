@@ -73,4 +73,35 @@ export class ServiceProxy extends Provider {
         const response: any = await this.nats.request(this.serviceId, input, timeout)
         return ServiceResponseCodec.decode(response)
     }
+
+    /**
+     * On service event
+     * @param eventName
+     * @param listener
+     * @param onlySingleClientReceived
+     */
+    public on(eventName: string, listener: (...args: any[]) => void, onlySingleClientReceived: boolean = false): this {
+        this.nats.onServiceEvent(this.serviceId, eventName, listener, onlySingleClientReceived)
+        return this
+    }
+
+    /**
+     * Once service event
+     * @param eventName
+     * @param listener
+     */
+    public once(eventName: string, listener: (...args: any[]) => void): this {
+        this.nats.onceServiceEvent(this.serviceId, eventName, listener)
+        return this
+    }
+
+    /**
+     * Off service events
+     * @param eventName
+     * @param listener
+     */
+    public off(eventName: string, listener?: (...args: any[]) => void): this {
+        this.nats.offServiceEvent(this.serviceId, eventName, listener)
+        return this
+    }
 }
