@@ -46,13 +46,13 @@ class TestComponent extends Component {
         // for (let i = 0; i < 1000; i++) {
         //     this.nats.publish('test', i)
         // }
-        const handler1 = async (data) => {
-            console.log('data1:', data)
+        const handler1 = async (data1, data2) => {
+            console.log('data1:', data1, data2)
             // this.nats.offServiceEvent(this.app.appId, 'testEvt', handler1)
             // this.self.off('testEvt', handler1)
         }
-        const handler2 = async (data) => {
-            console.log('data2:', data)
+        const handler2 = async (data1, data2) => {
+            console.log('data2:', data1, data2)
             // this.nats.offServiceEvent(this.app.appId, 'testEvt', handler1)
             // this.nats.offServiceEvent(this.app.appId, 'testEvt')
         }
@@ -61,7 +61,7 @@ class TestComponent extends Component {
         // this.nats.onServiceEvent(this.app.appId, 'testEvt', handler1)
         // this.nats.onServiceEvent(this.app.appId, 'testEvt', handler2)
         setInterval(() => {
-            this.nats.emitServiceEvent('testEvt', 123)
+            this.nats.emitServiceEvent('testEvt', 123, 456)
         }, 1000)
         try {
             console.log(await this.self.invoke({test: true}))
