@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.1](https://github.com/lakutata/lakutata-packages/compare/@lakutata/nats@1.3.0...@lakutata/nats@1.3.1) (2025-11-10)
+
+
+### Bug Fixes
+
+* **nats:** add default timeout for service proxy invocation ([d3f13ec](https://github.com/lakutata/lakutata-packages/commit/d3f13ec0884083e6ae162d1e89241cfad3a3680a))
+
+
+
+
+
 # [1.3.0](https://github.com/lakutata/lakutata-packages/compare/@lakutata/nats@1.2.0...@lakutata/nats@1.3.0) (2025-10-16)
 
 
