@@ -69,7 +69,7 @@ export class ServiceProxy extends Provider {
      * @param input
      * @param timeout
      */
-    public async invoke<T extends Record<string, any>>(input: ActionPattern<T>, timeout?: number): Promise<any> {
+    public async invoke<T extends Record<string, any>>(input: ActionPattern<T>, timeout: number = 60 * 60 * 1000): Promise<any> {
         const response: any = await this.nats.request(this.serviceId, input, timeout)
         return ServiceResponseCodec.decode(response)
     }
