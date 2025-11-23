@@ -1,6 +1,6 @@
 {
   "name": "@lakutata/nats",
-  "version": "1.3.1",
+  "version": "1.3.2",
   "description": "Lakutata NATS Client",
   "keywords": [
     "lakutata",
@@ -29,7 +29,7 @@
     "url": "https://github.com/lakutata/lakutata-packages/issues"
   },
   "dependencies": {
-    "nats": "^2.29.3",
-    "lakutata": "^2.0.89"
+    "lakutata": "^2.0.89",
+    "nats": "^2.29.3"
   }
 }
