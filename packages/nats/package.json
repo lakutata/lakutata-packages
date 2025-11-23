@@ -29,6 +29,7 @@
     "url": "https://github.com/lakutata/lakutata-packages/issues"
   },
   "dependencies": {
-    "nats": "^2.29.3"
+    "nats": "^2.29.3",
+    "lakutata": "^2.0.89"
   }
 }
