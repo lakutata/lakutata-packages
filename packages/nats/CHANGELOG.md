@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.7](https://github.com/lakutata/lakutata-packages/compare/@lakutata/nats@1.3.6...@lakutata/nats@1.3.7) (2025-12-13)
+
+**Note:** Version bump only for package @lakutata/nats
+
+
+
+
+
 ## [1.3.6](https://github.com/lakutata/lakutata-packages/compare/@lakutata/nats@1.3.5...@lakutata/nats@1.3.6) (2025-12-13)
 
 **Note:** Version bump only for package @lakutata/nats
