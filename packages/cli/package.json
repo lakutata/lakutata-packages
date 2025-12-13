@@ -40,7 +40,7 @@
     "degit": "^2.8.4",
     "execa": "^8.0.1",
     "inquirer": "^12.7.0",
-    "lakutata": "^2.0.89",
+    "lakutata": "^2.0.115",
     "latest-version": "^9.0.0",
     "log-update": "^6.1.0",
     "node-fetch-native": "^1.6.4",
