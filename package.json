@@ -6,7 +6,7 @@
   ],
   "scripts": {
     "postinstall": "lerna run rebuild",
-    "publish": "npm login && lerna run rebuild && lerna publish --no-push"
+    "publish": "lerna run rebuild && lerna publish --no-push"
   },
   "devDependencies": {
     "@types/node": "^20.12.7",
