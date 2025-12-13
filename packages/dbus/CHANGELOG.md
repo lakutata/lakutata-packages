@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.7](https://github.com/lakutata/lakutata-packages/compare/@lakutata/dbus@2.1.6...@lakutata/dbus@2.1.7) (2025-12-13)
+
+**Note:** Version bump only for package @lakutata/dbus
+
+
+
+
+
 ## [2.1.6](https://github.com/lakutata/lakutata-packages/compare/@lakutata/dbus@2.1.5...@lakutata/dbus@2.1.6) (2025-12-13)
 
 **Note:** Version bump only for package @lakutata/dbus

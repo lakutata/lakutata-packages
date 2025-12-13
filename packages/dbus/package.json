@@ -1,6 +1,6 @@
 {
   "name": "@lakutata/dbus",
-  "version": "2.1.6",
+  "version": "2.1.7",
   "description": "Lakutata DBus SDK",
   "keywords": [
     "lakutata",
