@@ -1,6 +1,6 @@
 {
   "name": "@lakutata/dbus",
-  "version": "2.1.4",
+  "version": "2.1.3",
   "description": "Lakutata DBus SDK",
   "keywords": [
     "lakutata",
@@ -46,5 +46,6 @@
   },
   "devDependencies": {
     "@types/degit": "^2.8.6"
-  }
+  },
+  "gitHead": "e69cf977574db006e9b587b01706a4911127167d"
 }
