@@ -6,7 +6,7 @@ import {
     DTO
 } from 'lakutata'
 import {Configurable, Inject} from 'lakutata/decorator/di'
-import {type Codec, StringCodec, connect, NatsConnection, Msg, Subscription} from 'nats'
+import {type Codec, connect, NatsConnection, Msg, Subscription} from 'nats'
 import {SubscribeOptions} from '../types/SubscribeOptions'
 import {NatsBadRequestException} from '../exceptions/NatsBadRequestException'
 import {NatsForbiddenException} from '../exceptions/NatsForbiddenException'
@@ -15,8 +15,8 @@ import {NatsRequestTimeoutException} from '../exceptions/NatsRequestTimeoutExcep
 import {NatsNoRespondersAvailableException} from '../exceptions/NatsNoRespondersAvailableException'
 import {NatsInternalServerException} from '../exceptions/NatsInternalServerException'
 import {NatsClientOptions} from '../interfaces/NatsClientOptions'
-import {JSONCodec} from '../codecs/JSONCodec'
 import {ServiceEventCodec, ServiceEventData} from '../lib/ServiceEventCodec'
+import {MessagePackCodec} from '../codecs/MessagePackCodec'
 
 export const buildNatsClientOptions: ComponentOptionsBuilder<NatsClientOptions> = (options: NatsClientOptions): ComponentOptions<NatsClientOptions> => {
     return {
@@ -60,7 +60,7 @@ export class NATS extends Component {
     @Configurable(DTO.Object({
         encode: DTO.Function().arity(1).required(),
         decode: DTO.Function().arity(1).required()
-    }).optional().default(JSONCodec()))
+    }).optional().default(MessagePackCodec()))
     protected readonly codec: Codec<unknown>
 
     /**
