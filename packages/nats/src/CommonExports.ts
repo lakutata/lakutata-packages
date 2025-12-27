@@ -2,6 +2,7 @@ export {SetupNatsServiceEntrypoint} from './entrypoints/SetupNatsServiceEntrypoi
 export {ServiceProxy, BuildServiceProxy, type BuildServiceProxyOptions} from './providers/ServiceProxy'
 export {NATS, buildNatsClientOptions} from './components/NATS'
 export {JSONCodec} from './codecs/JSONCodec'
+export {MessagePackCodec} from './codecs/MessagePackCodec'
 export {StringCodec} from 'nats'
 export type {SubscribeOptions} from './types/SubscribeOptions'
 export type {Subscription, Codec} from 'nats'
