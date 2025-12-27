@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.2.0](https://github.com/lakutata/lakutata-packages/compare/@lakutata/dbus@2.1.13...@lakutata/dbus@2.2.0) (2025-12-27)
+
+
+### Features
+
+* **nats:** add MessagePack codec and update dependencies ([9e229a9](https://github.com/lakutata/lakutata-packages/commit/9e229a98c74b77393c3dca26cc812564f49a326c))
+
+
+
+
+
 ## [2.1.13](https://github.com/lakutata/lakutata-packages/compare/@lakutata/dbus@2.1.12...@lakutata/dbus@2.1.13) (2025-12-13)
 
 **Note:** Version bump only for package @lakutata/dbus
