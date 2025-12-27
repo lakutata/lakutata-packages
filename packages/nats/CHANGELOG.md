@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.5.0](https://github.com/lakutata/lakutata-packages/compare/@lakutata/nats@1.4.0...@lakutata/nats@1.5.0) (2025-12-27)
+
+
+### Features
+
+* **nats:** export MessagePackCodec in CommonExports ([b22f0d0](https://github.com/lakutata/lakutata-packages/commit/b22f0d0480bbbe5b6e83b7f481e4f5ce4fc06e15))
+
+
+
+
+
 # [1.4.0](https://github.com/lakutata/lakutata-packages/compare/@lakutata/nats@1.3.12...@lakutata/nats@1.4.0) (2025-12-27)
 
 
