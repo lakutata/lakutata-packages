@@ -60,11 +60,11 @@ class TestComponent extends Component {
         this.self.on('testEvt', handler2)
         // this.nats.onServiceEvent(this.app.appId, 'testEvt', handler1)
         // this.nats.onServiceEvent(this.app.appId, 'testEvt', handler2)
-        setInterval(() => {
-            this.nats.emitServiceEvent('testEvt', 123, 456)
-        }, 1000)
+        // setInterval(() => {
+        //     this.nats.emitServiceEvent('testEvt', 123, 456)
+        // }, 1000)
         try {
-            console.log(await this.self.invoke({test: true}))
+            console.log(await this.self.invoke({test: true,start:new Date()}))
         } catch (e) {
             // console.error(JSON.parse(JSON.stringify(e)))
             console.error(e)
@@ -75,6 +75,7 @@ class TestComponent extends Component {
 class TestController extends Controller {
     @ServiceAction({test: true})
     public async test(inp) {
+        console.log(inp)
         // throw new Error('fuck')
         // throw new NatsForbiddenException('fuck')
         // return 'hahahah'
