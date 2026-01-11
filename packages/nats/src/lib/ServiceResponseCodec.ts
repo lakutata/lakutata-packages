@@ -28,11 +28,13 @@ export class ServiceResponseCodec {
     /**
      * Decode service response
      * @param response
+     * @param serviceId
      */
-    public static decode(response: ServiceResponse): any {
+    public static decode(response: ServiceResponse, serviceId?: string): any {
         if (!response.success) {
             const remoteError: Error | Exception = response.error!
             const serviceInvokeException: ServiceInvokeException = new ServiceInvokeException(remoteError.message || 'Unknown Error')
+            if (serviceId) serviceInvokeException.service = serviceId
             throw Object.assign(serviceInvokeException, response.error!)
         }
         return response.payload
