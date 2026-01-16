@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.6.0](https://github.com/lakutata/lakutata-packages/compare/@lakutata/nats@1.5.2...@lakutata/nats@1.6.0) (2026-01-16)
+
+
+### Features
+
+* **nats:** add task provider and update NATS component ([3ec7114](https://github.com/lakutata/lakutata-packages/commit/3ec7114af0aed0e548728339b44d21bc42e0e210))
+* **nats:** add Task provider to CommonExports ([ad07ee9](https://github.com/lakutata/lakutata-packages/commit/ad07ee9cff6306bbc77ccc9ce1fa3c025df04ee5))
+
+
+
+
+
 ## [1.5.2](https://github.com/lakutata/lakutata-packages/compare/@lakutata/nats@1.5.1...@lakutata/nats@1.5.2) (2026-01-11)
 
 **Note:** Version bump only for package @lakutata/nats

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0](https://github.com/lakutata/lakutata-packages/compare/@lakutata/dbus@2.2.0...@lakutata/dbus@2.3.0) (2026-01-16)
+
+
+### Features
+
+* **nats:** add task provider and update NATS component ([3ec7114](https://github.com/lakutata/lakutata-packages/commit/3ec7114af0aed0e548728339b44d21bc42e0e210))
+
+
+
+
+
 # [2.2.0](https://github.com/lakutata/lakutata-packages/compare/@lakutata/dbus@2.1.13...@lakutata/dbus@2.2.0) (2025-12-27)
 
 
