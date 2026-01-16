@@ -42,7 +42,7 @@
   },
   "dependencies": {
     "dbus-sdk": "^1.0.16",
-    "lakutata": "^2.0.117"
+    "lakutata": "^2.0.119"
   },
   "devDependencies": {
     "@types/degit": "^2.8.6"

@@ -64,9 +64,17 @@ class TestComponent extends Component {
         //     this.nats.emitServiceEvent('testEvt', 123, 456)
         // }, 1000)
         try {
-            console.log(await this.self.invoke({test: true,start:new Date()}))
+            console.log(await this.self.invoke({test: true, start: new Date()}))
         } catch (e) {
             // console.error(JSON.parse(JSON.stringify(e)))
+            console.error(e)
+        }
+        try {
+            const task = await this.nats.createTask('tasks.test1', async (data) => {
+                console.log('task2:', data)
+            })
+            await task.publish({time: Date.now()})
+        } catch (e) {
             console.error(e)
         }
     }
@@ -104,7 +112,8 @@ Application.run({
             service: SetupNatsServiceEntrypoint('nats')
         }),
         nats: buildNatsClientOptions({
-            servers: '127.0.0.1:4222'
+            // servers: '127.0.0.1:4222'
+            servers: '10.11.11.21:30422'
         }),
         test: {
             class: TestComponent
