@@ -1,6 +1,7 @@
 export {SetupNatsServiceEntrypoint} from './entrypoints/SetupNatsServiceEntrypoint'
 export {ServiceProxy, BuildServiceProxy, type BuildServiceProxyOptions} from './providers/ServiceProxy'
-export {Task, TaskOptions} from './providers/Task'
+export {TaskOptions} from './providers/Task'
+export {default as Task} from './providers/Task'
 export {RetentionPolicy} from 'nats'
 export {NATS, buildNatsClientOptions} from './components/NATS'
 export {JSONCodec} from './codecs/JSONCodec'

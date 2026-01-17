@@ -40,7 +40,7 @@ export class TaskOptions extends DTO {
     public concurrentTask?: number
 }
 
-export class Task extends Provider {
+class Task extends Provider {
 
     #requestTask: boolean = true
 
@@ -167,3 +167,5 @@ export class Task extends Provider {
         await this.jetStream.publish(this.subject, this.codec.encode(payload), {msgID: id})
     }
 }
+
+export default Task

@@ -17,7 +17,7 @@ import {NatsInternalServerException} from '../exceptions/NatsInternalServerExcep
 import {NatsClientOptions} from '../interfaces/NatsClientOptions'
 import {ServiceEventCodec, ServiceEventData} from '../lib/ServiceEventCodec'
 import {MessagePackCodec} from '../codecs/MessagePackCodec'
-import {Task, TaskOptions} from '../providers/Task'
+import Task, {TaskOptions} from '../providers/Task'
 
 export const buildNatsClientOptions: ComponentOptionsBuilder<NatsClientOptions> = (options: NatsClientOptions): ComponentOptions<NatsClientOptions> => {
     return {
