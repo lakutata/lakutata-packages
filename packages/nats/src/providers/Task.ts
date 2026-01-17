@@ -12,9 +12,9 @@ import {
     ConsumerInfo,
     nanos,
     ConsumerMessages,
-    StreamConfig
+    StreamConfig, JsMsg
 } from 'nats'
-import {MD5} from 'lakutata/helper'
+import {Delay, MD5} from 'lakutata/helper'
 import {Expect} from 'lakutata/decorator/dto'
 
 export class TaskOptions extends DTO {
@@ -115,23 +115,50 @@ class Task extends Provider {
             })
             const consumer: Consumer = await this.jetStream.consumers.get(consumerInfo.stream_name, consumerInfo.name)
             const concurrentTask: number = this.options.concurrentTask || 1
+            // setImmediate(async () => {
+            //     while (this.#requestTask) {
+            //         const msgs: ConsumerMessages = await consumer.consume({max_messages: concurrentTask})
+            //         const batchTasks: Promise<void>[] = []
+            //         for await (const msg of msgs) {
+            //             batchTasks.push(new Promise<void>(async (resolve, reject) => {
+            //                 try {
+            //                     await this.handler!(this.codec.decode(msg.data))
+            //                     msg.ack()
+            //                     return resolve()
+            //                 } catch (e) {
+            //                     msg.nak()
+            //                     return reject(e)
+            //                 }
+            //             }))
+            //         }
+            //         await Promise.all(batchTasks)
+            //     }
+            //     await consumer.delete()
+            // })
+
+            const taskSet: Set<Promise<void>> = new Set()
             setImmediate(async () => {
                 while (this.#requestTask) {
-                    const msgs: ConsumerMessages = await consumer.consume({max_messages: concurrentTask})
-                    const batchTasks: Promise<void>[] = []
-                    for await (const msg of msgs) {
-                        batchTasks.push(new Promise<void>(async (resolve, reject) => {
-                            try {
-                                await this.handler!(this.codec.decode(msg.data))
-                                msg.ack()
-                                return resolve()
-                            } catch (e) {
-                                msg.nak()
-                                return reject(e)
-                            }
-                        }))
+                    if (taskSet.size >= concurrentTask) {
+                        await Delay(10)
+                        continue
                     }
-                    await Promise.all(batchTasks)
+                    const msg: JsMsg | null = await consumer.next()
+                    if (!msg) {
+                        await Delay(10)
+                        continue
+                    }
+                    const task: Promise<void> = new Promise<void>(async (resolve, reject) => {
+                        try {
+                            await this.handler!(this.codec.decode(msg.data))
+                            msg.ack()
+                            taskSet.delete(task)
+                            return resolve()
+                        } catch (e) {
+                            return reject(e)
+                        }
+                    })
+                    taskSet.add(task)
                 }
                 await consumer.delete()
             })
