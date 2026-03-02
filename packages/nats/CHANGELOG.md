@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0](https://github.com/lakutata/lakutata-packages/compare/@lakutata/nats@1.6.2...@lakutata/nats@2.0.0) (2026-03-02)
+
+
+### Code Refactoring
+
+* **nats:** remove Task provider and simplify NATS component ([7eb57ac](https://github.com/lakutata/lakutata-packages/commit/7eb57ac4f7b89c1619a3042cbaca8869c0a8f8d2))
+
+
+### BREAKING CHANGES
+
+* **nats:** Task provider and related exports have been removed. Applications using the Task functionality will need to implement their own task management solution.
+
+
+
+
+
 ## [1.6.2](https://github.com/lakutata/lakutata-packages/compare/@lakutata/nats@1.6.1...@lakutata/nats@1.6.2) (2026-01-17)
 
 **Note:** Version bump only for package @lakutata/nats
