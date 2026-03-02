@@ -69,14 +69,6 @@ class TestComponent extends Component {
             // console.error(JSON.parse(JSON.stringify(e)))
             console.error(e)
         }
-        try {
-            const task = await this.nats.createTask('tasks.test1', async (data) => {
-                console.log('task2:', data)
-            })
-            await task.publish({time: Date.now()})
-        } catch (e) {
-            console.error(e)
-        }
     }
 }
 
