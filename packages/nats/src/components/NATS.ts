@@ -17,7 +17,6 @@ import {NatsInternalServerException} from '../exceptions/NatsInternalServerExcep
 import {NatsClientOptions} from '../interfaces/NatsClientOptions'
 import {ServiceEventCodec, ServiceEventData} from '../lib/ServiceEventCodec'
 import {MessagePackCodec} from '../codecs/MessagePackCodec'
-import Task, {TaskOptions} from '../providers/Task'
 
 export const buildNatsClientOptions: ComponentOptionsBuilder<NatsClientOptions> = (options: NatsClientOptions): ComponentOptions<NatsClientOptions> => {
     return {
@@ -202,23 +201,6 @@ export class NATS extends Component {
      */
     protected async destroy(): Promise<void> {
         await this.#conn.close()
-    }
-
-    /**
-     * Create task provider
-     * @param subject
-     * @param handler
-     * @param options
-     */
-    public async createTask(subject: string, handler?: (data: any) => void | Promise<void>, options?: TaskOptions): Promise<Task> {
-        return await this.buildObject(Task, {
-            jetStreamManager: await this.#conn.jetstreamManager(),
-            jetStream: this.#conn.jetstream(),
-            codec: this.codec,
-            options: options || {},
-            subject: subject,
-            handler: handler
-        })
     }
 
     /**
