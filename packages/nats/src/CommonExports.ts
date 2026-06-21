@@ -14,3 +14,5 @@ export {NatsInternalServerException} from './exceptions/NatsInternalServerExcept
 export {NatsNoRespondersAvailableException} from './exceptions/NatsNoRespondersAvailableException'
 export {NatsNotFoundException} from './exceptions/NatsNotFoundException'
 export {NatsRequestTimeoutException} from './exceptions/NatsRequestTimeoutException'
+export {ServiceInvokeException} from './exceptions/ServiceInvokeException'
+export {NatsBulkException} from './exceptions/NatsBulkException'
