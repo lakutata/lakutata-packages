@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.1.0](https://github.com/lakutata/lakutata-packages/compare/@lakutata/nats@2.0.1...@lakutata/nats@2.1.0) (2026-06-21)
+
+
+### Features
+
+* **nats:** add bulk data transfer and service proxy retry ([107ad48](https://github.com/lakutata/lakutata-packages/commit/107ad48219857f7f7e13dcfd728d1f92438f10a9)), closes [#2](https://github.com/lakutata/lakutata-packages/issues/2) [#3](https://github.com/lakutata/lakutata-packages/issues/3) [#7](https://github.com/lakutata/lakutata-packages/issues/7)
+
+
+
+
+
 ## [2.0.1](https://github.com/lakutata/lakutata-packages/compare/@lakutata/nats@2.0.0...@lakutata/nats@2.0.1) (2026-03-02)
 
 **Note:** Version bump only for package @lakutata/nats
