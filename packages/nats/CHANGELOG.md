@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.2.0](https://github.com/lakutata/lakutata-packages/compare/@lakutata/nats@2.1.0...@lakutata/nats@2.2.0) (2026-06-21)
+
+
+### Features
+
+* **nats:** update gitHead hash in package.json ([d1826a8](https://github.com/lakutata/lakutata-packages/commit/d1826a825492971f47c1d860360cab980733dea5))
+* **nats:** update gitHead hash in package.json ([d936b72](https://github.com/lakutata/lakutata-packages/commit/d936b7289cccf1bf6d567fb99b7557d87da66f5f))
+* **nats:** update gitHead hash in package.json ([4f25418](https://github.com/lakutata/lakutata-packages/commit/4f2541873b9dc5630a7788138b6541ae97da51a8)), closes [#2](https://github.com/lakutata/lakutata-packages/issues/2) [#3](https://github.com/lakutata/lakutata-packages/issues/3) [#7](https://github.com/lakutata/lakutata-packages/issues/7)
+
+
+
+
+
 # [2.1.0](https://github.com/lakutata/lakutata-packages/compare/@lakutata/nats@2.0.1...@lakutata/nats@2.1.0) (2026-06-21)
 
 
