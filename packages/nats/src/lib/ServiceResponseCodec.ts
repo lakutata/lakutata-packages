@@ -32,10 +32,21 @@ export class ServiceResponseCodec {
      */
     public static decode(response: ServiceResponse, serviceId?: string): any {
         if (!response.success) {
-            const remoteError: Error | Exception = response.error!
-            const serviceInvokeException: ServiceInvokeException = new ServiceInvokeException(remoteError.message || 'Unknown Error')
+            const remoteError: any = response.error
+            const serviceInvokeException: ServiceInvokeException = new ServiceInvokeException(remoteError?.message || 'Unknown Error')
             if (serviceId) serviceInvokeException.service = serviceId
-            throw Object.assign(serviceInvokeException, response.error!)
+            // 安全拷贝远端错误的自有属性:逐个赋值并跳过只读属性(如 NatsError 的 name),
+            // 避免 Object.assign 碰到只读属性时整体抛 TypeError。
+            if (remoteError && typeof remoteError === 'object') {
+                for (const key of Object.keys(remoteError)) {
+                    try {
+                        (serviceInvokeException as any)[key] = remoteError[key]
+                    } catch {
+                        // 只读属性,跳过
+                    }
+                }
+            }
+            throw serviceInvokeException
         }
         return response.payload
     }

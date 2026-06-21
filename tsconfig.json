@@ -1,6 +1,9 @@
 {
   "extends": "lakutata/tsconfig.json",
   "compilerOptions": {
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "useDefineForClassFields": false,
     "target": "ES2022",
     "lib": [
       "ES2022"

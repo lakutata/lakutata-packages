@@ -1,6 +1,11 @@
 .idea
+.DS_Store
 node_modules/
 dist/
 *.log
 .env
 .npmrc
+
+# Claude Code
+CLAUDE.md
+.claude/
