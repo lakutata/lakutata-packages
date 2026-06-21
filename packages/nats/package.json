@@ -34,7 +34,7 @@
     "lakutata": "^2.0.121",
     "nats": "^2.29.3"
   },
-  "gitHead": "4f2541873b9dc5630a7788138b6541ae97da51a8",
+  "gitHead": "d936b7289cccf1bf6d567fb99b7557d87da66f5f",
   "devDependencies": {
     "@types/bun": "^1.3.14",
     "testcontainers": "^12.0.3"
