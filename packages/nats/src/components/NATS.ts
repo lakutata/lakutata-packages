@@ -256,11 +256,15 @@ export class NATS extends Component {
                 name: this.name ? `${this.name}-bulk` : undefined
             })
             const bucket: string = this.bulkBucket ?? `lkt-bulk-${this.name ?? 'default'}`
-            this.#objectStore = await this.#bulkConn.jetstream().views.os(bucket, {
+            // 仅在用户【显式】配置了 bulkReplicas 时才下发 replicas;默认(undefined)不发该字段,
+            // 让 server 用默认单副本。无条件发 replicas 在部分 nats.js / NATS server 组合下会被
+            // 拒绝(invalid json: unknown field "replicas"),且默认值 1 显式下发本就没有收益。
+            const osOptions: Record<string, any> = {
                 storage: StorageType.File,
-                replicas: this.bulkReplicas ?? 1,
                 ttl: nanos(this.bulkTTL ?? 5 * 60 * 1000)
-            })
+            }
+            if (this.bulkReplicas !== undefined) osOptions.replicas = this.bulkReplicas
+            this.#objectStore = await this.#bulkConn.jetstream().views.os(bucket, osOptions)
         }
     }
 
