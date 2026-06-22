@@ -194,10 +194,12 @@ export class NATS extends Component {
     protected readonly bulkTTL?: number
 
     /**
-     * bulk bucket 副本数,默认 1(中转数据用完即弃,不需要高可用副本)。
+     * bulk bucket 副本数。默认【不下发】此字段,由 server 用其默认单副本;仅在显式配置时才下发。
+     * 重要:绝不能加 .default(),否则字段恒有值、会被无条件下发,在严格校验的 NATS server 上
+     * 触发 "invalid json: unknown field replicas" 导致启动失败(2.2.1 曾因加了 default 而修复无效)。
      * @protected
      */
-    @Configurable(DTO.Number().integer().optional().default(1))
+    @Configurable(DTO.Number().integer().optional())
     protected readonly bulkReplicas?: number
 
     /**
@@ -249,22 +251,38 @@ export class NATS extends Component {
         }
         this.#conn = await connect(connectOptions)
         if (this.bulk) {
-            // 用同一套配置再开一条【独立】连接专供大数据,避免大对象传输堵塞 core RPC 连接;
-            // 并 get-or-create 一个 Object Store bucket 做大对象中转(短 TTL 自动清理)。
-            this.#bulkConn = await connect({
-                ...connectOptions,
-                name: this.name ? `${this.name}-bulk` : undefined
-            })
-            const bucket: string = this.bulkBucket ?? `lkt-bulk-${this.name ?? 'default'}`
-            // 仅在用户【显式】配置了 bulkReplicas 时才下发 replicas;默认(undefined)不发该字段,
-            // 让 server 用默认单副本。无条件发 replicas 在部分 nats.js / NATS server 组合下会被
-            // 拒绝(invalid json: unknown field "replicas"),且默认值 1 显式下发本就没有收益。
-            const osOptions: Record<string, any> = {
-                storage: StorageType.File,
-                ttl: nanos(this.bulkTTL ?? 5 * 60 * 1000)
+            try {
+                // 用同一套配置再开一条【独立】连接专供大数据,避免大对象传输堵塞 core RPC 连接;
+                // 并 get-or-create 一个 Object Store bucket 做大对象中转(短 TTL 自动清理)。
+                this.#bulkConn = await connect({
+                    ...connectOptions,
+                    name: this.name ? `${this.name}-bulk` : undefined
+                })
+                const bucket: string = this.bulkBucket ?? `lkt-bulk-${this.name ?? 'default'}`
+                // 仅在用户【显式】配置了 bulkReplicas 时才下发 replicas;默认(undefined)不发该字段,
+                // 让 server 用默认单副本。无条件发 replicas 在严格校验的 NATS server 上会被
+                // 拒绝(invalid json: unknown field "replicas"),且默认单副本显式下发本就没有收益。
+                const osOptions: Record<string, any> = {
+                    storage: StorageType.File,
+                    ttl: nanos(this.bulkTTL ?? 5 * 60 * 1000)
+                }
+                if (this.bulkReplicas !== undefined) osOptions.replicas = this.bulkReplicas
+                this.#objectStore = await this.#bulkConn.jetstream().views.os(bucket, osOptions)
+            } catch (e: any) {
+                // 优雅降级:bulk 初始化失败(JetStream 不可用 / 创建被拒 / 超时等)绝不阻塞启动。
+                // 清理半建连接并禁用 bulk(bulkEnabled 依赖 #objectStore → 自动转 false),warn 后继续,
+                // 核心 RPC/事件照常工作,仅大数据中转不可用。
+                this.#objectStore = undefined
+                if (this.#bulkConn) {
+                    try {
+                        await this.#bulkConn.close()
+                    } catch {
+                        // 忽略关闭错误
+                    }
+                    this.#bulkConn = undefined
+                }
+                console.warn(`[NATS] bulk 旁路初始化失败,已自动禁用 bulk(核心 RPC/事件不受影响,仅大数据中转不可用): ${e?.message ?? e}`)
             }
-            if (this.bulkReplicas !== undefined) osOptions.replicas = this.bulkReplicas
-            this.#objectStore = await this.#bulkConn.jetstream().views.os(bucket, osOptions)
         }
     }
 
