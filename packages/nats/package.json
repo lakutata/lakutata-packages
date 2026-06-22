@@ -1,6 +1,6 @@
 {
   "name": "@lakutata/nats",
-  "version": "2.2.1",
+  "version": "2.2.2",
   "description": "Lakutata NATS Client",
   "keywords": [
     "lakutata",
