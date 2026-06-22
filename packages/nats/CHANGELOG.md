@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.2.1](https://github.com/lakutata/lakutata-packages/compare/@lakutata/nats@2.2.0...@lakutata/nats@2.2.1) (2026-06-22)
+
+
+### Bug Fixes
+
+* **nats:** do not send replicas field to object store by default ([4a05d8b](https://github.com/lakutata/lakutata-packages/commit/4a05d8bd50e689b4b594ccef3f9fada62f788049))
+
+
+
+
+
 # [2.2.0](https://github.com/lakutata/lakutata-packages/compare/@lakutata/nats@2.1.0...@lakutata/nats@2.2.0) (2026-06-21)
 
 
